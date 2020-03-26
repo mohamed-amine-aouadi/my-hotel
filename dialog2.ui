@@ -1,33 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Dialog</class>
- <widget class="QDialog" name="Dialog">
+ <class>Dialog2</class>
+ <widget class="QDialog" name="Dialog2">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>805</width>
-    <height>486</height>
+    <width>919</width>
+    <height>484</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QTableView" name="tableView">
+  <widget class="QPushButton" name="pushButton_29">
    <property name="geometry">
     <rect>
-     <x>10</x>
-     <y>10</y>
-     <width>421</width>
-     <height>281</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="pushButton_33">
-   <property name="geometry">
-    <rect>
-     <x>460</x>
-     <y>110</y>
+     <x>510</x>
+     <y>80</y>
      <width>80</width>
      <height>21</height>
     </rect>
@@ -39,10 +29,26 @@
     <string>pdf</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_18">
+  <widget class="QPushButton" name="pushButton_30">
    <property name="geometry">
     <rect>
-     <x>340</x>
+     <x>510</x>
+     <y>110</y>
+     <width>80</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="autoFillBackground">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>print</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_21">
+   <property name="geometry">
+    <rect>
+     <x>510</x>
      <y>400</y>
      <width>80</width>
      <height>21</height>
@@ -55,36 +61,30 @@
     <string>affichage</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_28">
+  <widget class="QTableView" name="tableView_2">
    <property name="geometry">
     <rect>
-     <x>460</x>
-     <y>80</y>
-     <width>80</width>
-     <height>21</height>
+     <x>10</x>
+     <y>10</y>
+     <width>481</width>
+     <height>321</height>
     </rect>
    </property>
-   <property name="autoFillBackground">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string>print</string>
-   </property>
   </widget>
-  <widget class="QLineEdit" name="idMS">
+  <widget class="QLineEdit" name="idES_2">
    <property name="geometry">
     <rect>
-     <x>440</x>
+     <x>500</x>
      <y>20</y>
      <width>113</width>
      <height>21</height>
     </rect>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton">
+  <widget class="QPushButton" name="pushButton_3">
    <property name="geometry">
     <rect>
-     <x>460</x>
+     <x>510</x>
      <y>50</y>
      <width>80</width>
      <height>21</height>
@@ -94,37 +94,11 @@
     <string>supprimer</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="QNT_3">
+  <widget class="QPushButton" name="pushButton_33">
    <property name="geometry">
     <rect>
-     <x>10</x>
-     <y>390</y>
-     <width>160</width>
-     <height>25</height>
-    </rect>
-   </property>
-   <property name="autoFillBackground">
-    <bool>true</bool>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="Ref_3">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>350</y>
-     <width>160</width>
-     <height>25</height>
-    </rect>
-   </property>
-   <property name="autoFillBackground">
-    <bool>true</bool>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="pushButton_31">
-   <property name="geometry">
-    <rect>
-     <x>220</x>
-     <y>400</y>
+     <x>510</x>
+     <y>430</y>
      <width>80</width>
      <height>21</height>
     </rect>
@@ -133,14 +107,27 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>modifier</string>
+    <string>Valider</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="etatM_3">
+  <widget class="QCalendarWidget" name="calendarWidget_8">
    <property name="geometry">
     <rect>
-     <x>10</x>
-     <y>430</y>
+     <x>300</x>
+     <y>340</y>
+     <width>131</width>
+     <height>141</height>
+    </rect>
+   </property>
+   <property name="autoFillBackground">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="TypeEVE_3">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>370</y>
      <width>160</width>
      <height>25</height>
     </rect>
@@ -149,12 +136,25 @@
     <bool>true</bool>
    </property>
   </widget>
-  <widget class="QLineEdit" name="rechercheM">
+  <widget class="QLineEdit" name="idEVE_3">
    <property name="geometry">
     <rect>
-     <x>440</x>
-     <y>140</y>
-     <width>121</width>
+     <x>40</x>
+     <y>340</y>
+     <width>160</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="autoFillBackground">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="NBpEVE_3">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>400</y>
+     <width>160</width>
      <height>25</height>
     </rect>
    </property>
@@ -165,9 +165,9 @@
   <widget class="QPushButton" name="pushButton_36">
    <property name="geometry">
     <rect>
-     <x>440</x>
-     <y>210</y>
-     <width>101</width>
+     <x>510</x>
+     <y>170</y>
+     <width>91</width>
      <height>21</height>
     </rect>
    </property>
@@ -178,28 +178,46 @@
     <string>recherche </string>
    </property>
   </widget>
+  <widget class="QLineEdit" name="rechercheM_3">
+   <property name="geometry">
+    <rect>
+     <x>500</x>
+     <y>140</y>
+     <width>111</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="autoFillBackground">
+    <bool>true</bool>
+   </property>
+  </widget>
   <widget class="QComboBox" name="comboBox">
    <property name="geometry">
     <rect>
-     <x>460</x>
-     <y>180</y>
+     <x>630</x>
+     <y>140</y>
      <width>72</width>
      <height>22</height>
     </rect>
    </property>
    <item>
     <property name="text">
-     <string>reference</string>
+     <string>id</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>type</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>date</string>
     </property>
    </item>
    <item>
     <property name="text">
      <string>nbr</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>etat</string>
     </property>
    </item>
   </widget>

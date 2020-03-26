@@ -2,8 +2,7 @@
 #define DIALOG_H
 
 #include <QDialog>
-#include "personnel.h"
-
+#include "materiaux.h"
 
 namespace Ui {
 class Dialog;
@@ -18,34 +17,29 @@ public:
     ~Dialog();
 
 private slots:
-    void on_pushButton_2_clicked();
+    void on_pushButton_18_clicked();
 
-    void on_pushButton_3_clicked();
+    void on_pushButton_28_clicked();
 
-    void on_tabpersonnel_activated(const QModelIndex &index);
+    void on_pushButton_33_clicked();
 
     void on_pushButton_clicked();
 
-    void on_pushButton_4_clicked();
+    void on_pushButton_31_clicked();
 
-    void on_pushButton_5_clicked();
+    void on_pushButton_37_clicked();
 
-    void on_pushButton_6_clicked();
+    void on_pushButton_34_clicked();
 
-    void on_pushButton_7_clicked();
+    void on_pushButton_36_clicked();
 
-    void on_pushButton_8_clicked();
+    void on_tableView_activated(const QModelIndex &index);
 
-
-
-
-
-    void on_pushButton_9_clicked();
+    void on_comboBox_activated(const QString &arg1);
 
 private:
     Ui::Dialog *ui;
-
-    PERSONNEL tmppersonnel;
+    materiaux tmpM ;
 
 };
 

@@ -2,10 +2,11 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include "personnel.h"
+#include "materiaux.h"
+#include "evenement.h"
 #include "dialog.h"
-#include "affichage.h"
-#include "demande.h"
+#include "dialog2.h"
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -37,19 +38,53 @@ private slots:
 
     void on_pushButton_27_clicked();
 
-    void on_pushButton_10_clicked();
+    void on_pushButton_16_clicked();
 
-    void on_pushButton_12_clicked();
+    void on_pushButton_19_clicked();
 
-    void on_pushButton_13_clicked();
+    void on_pushButton_21_clicked();
 
-    void on_pushButton_15_clicked();
+    void on_pushButton_18_clicked();
+
+
+    void on_pushButton_clicked();
+
+    void on_pushButton_2_clicked();
+
+    void on_pushButton_31_clicked();
+
+    void on_pushButton_32_clicked();
+
+    void on_pushButton_28_clicked();
+
+    void on_pushButton_29_clicked();
+
+    void on_pushButton_30_clicked();
+
+    void on_pushButton_33_clicked();
+
+    void on_pushButton_34_clicked();
+
+    void on_pushButton_35_clicked();
+
+    void on_pushButton_36_clicked();
+
+    void on_pushButton_37_clicked();
+
+    void on_pushButton_39_clicked();
+
+    void on_pushButton_41_clicked();
+
+    void on_pushButton_40_clicked();
+
+    void on_pushButton_38_clicked();
 
 private:
     Ui::MainWindow *ui;
-    Dialog *secPage;
-    Affichage *secPag;
-    PERSONNEL tmppersonnel;
-    demande tmpdemande;
+    materiaux tmpM ;
+    evenement tmpE ;
+    Dialog *d;
+    Dialog2 *d2;
+
 };
 #endif // MAINWINDOW_H

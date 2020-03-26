@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>854</width>
-    <height>556</height>
+    <width>879</width>
+    <height>600</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -30,7 +30,7 @@
      <bool>true</bool>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>3</number>
     </property>
     <property name="documentMode">
      <bool>true</bool>
@@ -386,7 +386,7 @@
        </rect>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <property name="documentMode">
        <bool>true</bool>
@@ -395,143 +395,123 @@
        <attribute name="title">
         <string>Tab 1</string>
        </attribute>
-       <widget class="QTabWidget" name="tabWidget_7">
+       <widget class="QPushButton" name="pushButton_10">
         <property name="geometry">
          <rect>
-          <x>0</x>
-          <y>-20</y>
-          <width>811</width>
-          <height>491</height>
+          <x>450</x>
+          <y>400</y>
+          <width>80</width>
+          <height>21</height>
          </rect>
         </property>
-        <property name="currentIndex">
-         <number>1</number>
+        <property name="autoFillBackground">
+         <bool>true</bool>
         </property>
-        <widget class="QWidget" name="tab_11">
-         <attribute name="title">
-          <string>Tab 1</string>
-         </attribute>
-        </widget>
-        <widget class="QWidget" name="tab_12">
-         <attribute name="title">
-          <string>Tab 2</string>
-         </attribute>
-         <widget class="QPushButton" name="pushButton_10">
-          <property name="geometry">
-           <rect>
-            <x>50</x>
-            <y>370</y>
-            <width>80</width>
-            <height>21</height>
-           </rect>
-          </property>
-          <property name="autoFillBackground">
-           <bool>true</bool>
-          </property>
-          <property name="text">
-           <string>Valider</string>
-          </property>
-         </widget>
-         <widget class="QCalendarWidget" name="date">
-          <property name="geometry">
-           <rect>
-            <x>400</x>
-            <y>90</y>
-            <width>281</width>
-            <height>201</height>
-           </rect>
-          </property>
-          <property name="autoFillBackground">
-           <bool>true</bool>
-          </property>
-         </widget>
-         <widget class="QPushButton" name="pushButton_11">
-          <property name="geometry">
-           <rect>
-            <x>610</x>
-            <y>370</y>
-            <width>80</width>
-            <height>21</height>
-           </rect>
-          </property>
-          <property name="autoFillBackground">
-           <bool>true</bool>
-          </property>
-          <property name="text">
-           <string>Quitter</string>
-          </property>
-         </widget>
-         <widget class="QPushButton" name="pushButton_12">
-          <property name="geometry">
-           <rect>
-            <x>510</x>
-            <y>370</y>
-            <width>75</width>
-            <height>23</height>
-           </rect>
-          </property>
-          <property name="text">
-           <string>afficher</string>
-          </property>
-         </widget>
-         <widget class="QLineEdit" name="grade">
-          <property name="geometry">
-           <rect>
-            <x>50</x>
-            <y>160</y>
-            <width>160</width>
-            <height>25</height>
-           </rect>
-          </property>
-          <property name="autoFillBackground">
-           <bool>true</bool>
-          </property>
-         </widget>
-         <widget class="QLabel" name="label_10">
-          <property name="geometry">
-           <rect>
-            <x>40</x>
-            <y>40</y>
-            <width>241</width>
-            <height>41</height>
-           </rect>
-          </property>
-          <property name="font">
-           <font>
-            <pointsize>16</pointsize>
-           </font>
-          </property>
-          <property name="text">
-           <string>Personnel :</string>
-          </property>
-         </widget>
-         <widget class="QLineEdit" name="salaire">
-          <property name="geometry">
-           <rect>
-            <x>50</x>
-            <y>200</y>
-            <width>160</width>
-            <height>25</height>
-           </rect>
-          </property>
-          <property name="autoFillBackground">
-           <bool>true</bool>
-          </property>
-         </widget>
-         <widget class="QLineEdit" name="cin">
-          <property name="geometry">
-           <rect>
-            <x>50</x>
-            <y>120</y>
-            <width>160</width>
-            <height>25</height>
-           </rect>
-          </property>
-          <property name="autoFillBackground">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </widget>
+        <property name="text">
+         <string>Valider</string>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="Grade">
+        <property name="geometry">
+         <rect>
+          <x>70</x>
+          <y>190</y>
+          <width>160</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="autoFillBackground">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_3">
+        <property name="geometry">
+         <rect>
+          <x>70</x>
+          <y>40</y>
+          <width>241</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>16</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Personnel :</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton_11">
+        <property name="geometry">
+         <rect>
+          <x>80</x>
+          <y>400</y>
+          <width>80</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="autoFillBackground">
+         <bool>true</bool>
+        </property>
+        <property name="text">
+         <string>Quitter</string>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="Salaire">
+        <property name="geometry">
+         <rect>
+          <x>70</x>
+          <y>230</y>
+          <width>160</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="autoFillBackground">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton_12">
+        <property name="geometry">
+         <rect>
+          <x>580</x>
+          <y>400</y>
+          <width>80</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="autoFillBackground">
+         <bool>true</bool>
+        </property>
+        <property name="text">
+         <string>affichage</string>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="CIINP">
+        <property name="geometry">
+         <rect>
+          <x>70</x>
+          <y>150</y>
+          <width>160</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="autoFillBackground">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QCalendarWidget" name="calendarWidget_3">
+        <property name="geometry">
+         <rect>
+          <x>420</x>
+          <y>120</y>
+          <width>291</width>
+          <height>201</height>
+         </rect>
+        </property>
+        <property name="autoFillBackground">
+         <bool>true</bool>
+        </property>
        </widget>
       </widget>
       <widget class="QWidget" name="tab_6">
@@ -567,7 +547,7 @@
          <bool>true</bool>
         </property>
        </widget>
-       <widget class="QCalendarWidget" name="DATEDEBUT">
+       <widget class="QCalendarWidget" name="calendarWidget_4">
         <property name="geometry">
          <rect>
           <x>420</x>
@@ -596,6 +576,19 @@
          <string>Quitter</string>
         </property>
        </widget>
+       <widget class="QLineEdit" name="TypeP">
+        <property name="geometry">
+         <rect>
+          <x>70</x>
+          <y>190</y>
+          <width>160</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="autoFillBackground">
+         <bool>true</bool>
+        </property>
+       </widget>
        <widget class="QLabel" name="label_4">
         <property name="geometry">
          <rect>
@@ -614,7 +607,7 @@
          <string>Demande :</string>
         </property>
        </widget>
-       <widget class="QLineEdit" name="QUANTITE_DEMANDE">
+       <widget class="QLineEdit" name="Demande">
         <property name="geometry">
          <rect>
           <x>70</x>
@@ -643,26 +636,6 @@
          <string>affichage</string>
         </property>
        </widget>
-       <widget class="QComboBox" name="TYPE_DEMANDE">
-        <property name="geometry">
-         <rect>
-          <x>70</x>
-          <y>190</y>
-          <width>161</width>
-          <height>21</height>
-         </rect>
-        </property>
-        <item>
-         <property name="text">
-          <string>Congé</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Augmentation de salaire</string>
-         </property>
-        </item>
-       </widget>
       </widget>
      </widget>
     </widget>
@@ -680,7 +653,7 @@
        </rect>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <property name="documentMode">
        <bool>true</bool>
@@ -689,11 +662,24 @@
        <attribute name="title">
         <string>Tab 1</string>
        </attribute>
+       <widget class="QLineEdit" name="QNT">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>170</y>
+          <width>160</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="autoFillBackground">
+         <bool>true</bool>
+        </property>
+       </widget>
        <widget class="QPushButton" name="pushButton_17">
         <property name="geometry">
          <rect>
-          <x>70</x>
-          <y>400</y>
+          <x>80</x>
+          <y>350</y>
           <width>80</width>
           <height>21</height>
          </rect>
@@ -705,66 +691,11 @@
          <string>Quitter</string>
         </property>
        </widget>
-       <widget class="QLineEdit" name="Ref">
-        <property name="geometry">
-         <rect>
-          <x>60</x>
-          <y>150</y>
-          <width>160</width>
-          <height>25</height>
-         </rect>
-        </property>
-        <property name="autoFillBackground">
-         <bool>true</bool>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="pushButton_16">
-        <property name="geometry">
-         <rect>
-          <x>440</x>
-          <y>400</y>
-          <width>80</width>
-          <height>21</height>
-         </rect>
-        </property>
-        <property name="autoFillBackground">
-         <bool>true</bool>
-        </property>
-        <property name="text">
-         <string>Valider</string>
-        </property>
-       </widget>
-       <widget class="QLineEdit" name="etatM">
-        <property name="geometry">
-         <rect>
-          <x>60</x>
-          <y>230</y>
-          <width>160</width>
-          <height>25</height>
-         </rect>
-        </property>
-        <property name="autoFillBackground">
-         <bool>true</bool>
-        </property>
-       </widget>
-       <widget class="QLineEdit" name="QNT">
-        <property name="geometry">
-         <rect>
-          <x>60</x>
-          <y>190</y>
-          <width>160</width>
-          <height>25</height>
-         </rect>
-        </property>
-        <property name="autoFillBackground">
-         <bool>true</bool>
-        </property>
-       </widget>
        <widget class="QLabel" name="label_5">
         <property name="geometry">
          <rect>
-          <x>60</x>
-          <y>40</y>
+          <x>20</x>
+          <y>20</y>
           <width>241</width>
           <height>41</height>
          </rect>
@@ -778,32 +709,24 @@
          <string>Materiaux :</string>
         </property>
        </widget>
-       <widget class="QPushButton" name="pushButton_18">
+       <widget class="QLineEdit" name="etatM">
         <property name="geometry">
          <rect>
-          <x>570</x>
-          <y>400</y>
-          <width>80</width>
-          <height>21</height>
+          <x>20</x>
+          <y>210</y>
+          <width>160</width>
+          <height>25</height>
          </rect>
         </property>
         <property name="autoFillBackground">
          <bool>true</bool>
         </property>
-        <property name="text">
-         <string>affichage</string>
-        </property>
        </widget>
-      </widget>
-      <widget class="QWidget" name="tab_8">
-       <attribute name="title">
-        <string>Tab 2</string>
-       </attribute>
-       <widget class="QPushButton" name="pushButton_19">
+       <widget class="QPushButton" name="pushButton_16">
         <property name="geometry">
          <rect>
-          <x>440</x>
-          <y>400</y>
+          <x>420</x>
+          <y>350</y>
           <width>80</width>
           <height>21</height>
          </rect>
@@ -815,11 +738,11 @@
          <string>Valider</string>
         </property>
        </widget>
-       <widget class="QLineEdit" name="NomEVE">
+       <widget class="QLineEdit" name="Ref">
         <property name="geometry">
          <rect>
-          <x>60</x>
-          <y>150</y>
+          <x>20</x>
+          <y>130</y>
           <width>160</width>
           <height>25</height>
          </rect>
@@ -828,24 +751,73 @@
          <bool>true</bool>
         </property>
        </widget>
-       <widget class="QCalendarWidget" name="calendarWidget_5">
+       <widget class="QPushButton" name="pushButton_38">
         <property name="geometry">
          <rect>
-          <x>410</x>
-          <y>120</y>
-          <width>291</width>
-          <height>201</height>
+          <x>620</x>
+          <y>350</y>
+          <width>80</width>
+          <height>21</height>
          </rect>
         </property>
         <property name="autoFillBackground">
          <bool>true</bool>
         </property>
+        <property name="text">
+         <string>afficher</string>
+        </property>
+       </widget>
+       <zorder>pushButton_16</zorder>
+       <zorder>QNT</zorder>
+       <zorder>pushButton_17</zorder>
+       <zorder>label_5</zorder>
+       <zorder>etatM</zorder>
+       <zorder>Ref</zorder>
+       <zorder>pushButton_38</zorder>
+      </widget>
+      <widget class="QWidget" name="tab_8">
+       <attribute name="title">
+        <string>Tab 2</string>
+       </attribute>
+       <widget class="QLabel" name="label_6">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>30</y>
+          <width>241</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>16</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Evenements :</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton_21">
+        <property name="geometry">
+         <rect>
+          <x>370</x>
+          <y>350</y>
+          <width>80</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="autoFillBackground">
+         <bool>true</bool>
+        </property>
+        <property name="text">
+         <string>afficher</string>
+        </property>
        </widget>
        <widget class="QPushButton" name="pushButton_20">
         <property name="geometry">
          <rect>
-          <x>70</x>
-          <y>400</y>
+          <x>50</x>
+          <y>350</y>
           <width>80</width>
           <height>21</height>
          </rect>
@@ -860,7 +832,33 @@
        <widget class="QLineEdit" name="TypeEVE">
         <property name="geometry">
          <rect>
-          <x>60</x>
+          <x>20</x>
+          <y>140</y>
+          <width>160</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="autoFillBackground">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="idEVE">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>100</y>
+          <width>160</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="autoFillBackground">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="NBpEVE">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
           <y>190</y>
           <width>160</width>
           <height>25</height>
@@ -870,42 +868,24 @@
          <bool>true</bool>
         </property>
        </widget>
-       <widget class="QLabel" name="label_6">
+       <widget class="QCalendarWidget" name="calendarWidget_5">
         <property name="geometry">
          <rect>
-          <x>60</x>
+          <x>400</x>
           <y>40</y>
-          <width>241</width>
-          <height>41</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <pointsize>16</pointsize>
-         </font>
-        </property>
-        <property name="text">
-         <string>Evenements :</string>
-        </property>
-       </widget>
-       <widget class="QLineEdit" name="NBpEVE">
-        <property name="geometry">
-         <rect>
-          <x>60</x>
-          <y>230</y>
-          <width>160</width>
-          <height>25</height>
+          <width>281</width>
+          <height>251</height>
          </rect>
         </property>
         <property name="autoFillBackground">
          <bool>true</bool>
         </property>
        </widget>
-       <widget class="QPushButton" name="pushButton_21">
+       <widget class="QPushButton" name="pushButton_19">
         <property name="geometry">
          <rect>
-          <x>570</x>
-          <y>400</y>
+          <x>590</x>
+          <y>350</y>
           <width>80</width>
           <height>21</height>
          </rect>
@@ -914,7 +894,7 @@
          <bool>true</bool>
         </property>
         <property name="text">
-         <string>affichage</string>
+         <string>Valider</string>
         </property>
        </widget>
       </widget>
@@ -934,7 +914,7 @@
        </rect>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <property name="documentMode">
        <bool>true</bool>
@@ -1217,8 +1197,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>854</width>
-     <height>22</height>
+     <width>879</width>
+     <height>20</height>
     </rect>
    </property>
   </widget>

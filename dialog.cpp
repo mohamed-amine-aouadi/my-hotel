@@ -1,11 +1,14 @@
 #include "dialog.h"
 #include "ui_dialog.h"
-#include <QMessageBox>
+#include "mainwindow.h"
+#include "ui_mainwindow.h"
 #include <QTabWidget>
+#include "materiaux.h"
 #include <QString>
 #include <QSqlQuery>
 #include <QSqlQueryModel>
 #include <QMessageBox>
+#include "evenement.h"
 #include <QSqlQueryModel>
 #include <QTextDocument>
 #include <QTextStream>
@@ -17,186 +20,164 @@
 #include <QStringList>
 #ifndef QT_NO_PRINTER
 #include <QPrinter>
-#include <QCalendar>
 #endif
 Dialog::Dialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Dialog)
 {
     ui->setupUi(this);
-    ui->recherche_cin->setPlaceholderText("CIN");
-    ui->recherche_grade->setPlaceholderText("GRADE");
-    ui->recherche_salaire->setPlaceholderText("SALAIRE");
-    ui->recherche_date->setPlaceholderText("DATE");
-    ui->recherche_presence->setPlaceholderText("PRESENCE");
 }
 
 Dialog::~Dialog()
 {
     delete ui;
 }
-void Dialog::on_pushButton_3_clicked()
+
+void Dialog::on_pushButton_18_clicked()
 {
-    ui->tabpersonnel->setModel(tmppersonnel.afficher());
+    ui->tableView->setModel(tmpM.afficher());
+
 }
 
-void Dialog::on_pushButton_2_clicked()
+void Dialog::on_pushButton_28_clicked()
 {
-    int cin = ui->recherche_cin->text().toInt();
-    bool test=tmppersonnel.supprimer(cin);
-    if (test)
-    {ui->tabpersonnel->setModel(tmppersonnel.afficher());//refresh
-        QMessageBox::critical(nullptr, QObject::tr("database is open"),
-                              QObject::tr("personnel supprimer.\n"
-                                "Click Cancel to exit."), QMessageBox::Cancel);
+    QString strStream;
+        QTextStream out(&strStream);
+
+        const int rowCount = ui->tableView->model()->rowCount();
+        const int columnCount = ui->tableView->model()->columnCount();
+        for (int column = 0; column < columnCount; column++)
+            if (!ui->tableView->isColumnHidden(column))
+                out << QString("<th>%1</th>").arg(ui->tableView->model()->headerData(column, Qt::Horizontal).toString());
+        for (int row = 0; row < rowCount; row++) {
+            out << "<tr>";
+            for (int column = 0; column < columnCount; column++) {
+                if (!ui->tableView->isColumnHidden(column)) {
+                    QString data =ui->tableView->model()->data(ui->tableView->model()->index(row, column)).toString().simplified();
+                    out << QString("<td bkcolor=0>%1</td>").arg((!data.isEmpty()) ? data : QString("&nbsp;"));
+                }
+            }
+        }
+        QTextDocument *document = new QTextDocument();
+        document->setHtml(strStream);
+
+       QPrinter printer ;
+       QPrintDialog *daddy = new QPrintDialog(&printer, NULL);
+        if (daddy->exec() == QDialog::Accepted) {
+            document->print(&printer);
+        }
+
+        delete document;
+
+
+
 }
+
+void Dialog::on_pushButton_33_clicked()
+{
+    QString strStream;
+        QTextStream out(&strStream);
+
+        const int rowCount = ui->tableView->model()->rowCount();
+        const int columnCount = ui->tableView->model()->columnCount();
+        for (int column = 0; column < columnCount; column++)
+            if (!ui->tableView->isColumnHidden(column))
+               out << QString("<th>%1</th>").arg(ui->tableView->model()->headerData(column, Qt::Horizontal).toString());
+
+        for (int row = 0; row < rowCount; row++) {
+            for (int column = 0; column < columnCount; column++) {
+                if (!ui->tableView->isColumnHidden(column)) {
+                    QString data =ui->tableView->model()->data(ui->tableView->model()->index(row, column)).toString().simplified();
+                    out << QString("<td bkcolor=0>%1</td>").arg((!data.isEmpty()) ? data : QString("&nbsp;"));
+                }
+            }
+        }
+       QTextDocument *document = new QTextDocument();
+       document->setHtml(strStream);
+
+       QString fileName = QFileDialog::getSaveFileName((QWidget* )0, "Export PDF", QString(), ".pdf");
+       if (QFileInfo(fileName).suffix().isEmpty()) { fileName.append(".txt.pdf"); }
+
+       QPrinter printer(QPrinter::PrinterResolution);
+       printer.setOutputFormat(QPrinter::PdfFormat);
+       printer.setPaperSize(QPrinter::A4);
+       printer.setOutputFileName(fileName);
+
+       QTextDocument doc;
+
+       doc.setHtml(document->toPlainText());
+        doc.print(&printer);
+
 }
+
 void Dialog::on_pushButton_clicked()
 {
-   int cin,presence,salaire;
-   QString grade,date;
-   cin=ui->recherche_cin->text().toInt();
-   grade=ui->recherche_grade->text();
-   presence=ui->recherche_presence->text().toInt();
-   salaire=ui->recherche_salaire->text().toInt();
-   date=ui->recherche_date->text();
-   QSqlQuery qry;
-   qry.prepare("update PERSONNEL set GRADE=:Grade,PRESENCE=:Presence,SALAIRE=:Salaire,DATECONTRAT=:Date where CIN=:cin ");
-   qry.bindValue(":cin",cin);
-   qry.bindValue(":Grade",grade);
-   qry.bindValue(":Presence",presence);
-   qry.bindValue(":Salaire",salaire);
-   qry.bindValue(":Date",date);
-           QMessageBox::critical(nullptr, QObject::tr("database is open"),
-                                 QObject::tr("personnel modifier.\n"
-                                   "Click Cancel to exit."), QMessageBox::Cancel);
-   qry.exec();
-   ui->tabpersonnel->setModel(tmppersonnel.afficher());//refresh
+    int id = ui->idMS->text().toInt();
+    bool test = tmpM.supp(id);
+    if (test)
+    {
+        QMessageBox::information(nullptr, QObject::tr("database is open"),
+                    QObject::tr("materiaux supprimer.\n"
+                                "Click Cancel to exit."), QMessageBox::Cancel);
+
+    }
 }
 
-
-void Dialog::on_tabpersonnel_activated(const QModelIndex &index)
+void Dialog::on_pushButton_31_clicked()
 {
-    QString val=ui->tabpersonnel->model()->data(index).toString();
-    QSqlQuery qry;
-    qry.prepare("select * from PERSONNEL where CIN=:val or GRADE=:val or PRESENCE=:val or SALAIRE=:val or DATECONTRAT=:val");
-    qry.bindValue(":val",val);
-    if (qry.exec())
+    QString ref=ui->Ref_3->text();
+    int nbr = ui->QNT_3->text().toInt();
+    QString etat = ui->etatM_3->text();
+    materiaux M(ref,nbr,etat);
+    bool test=M.modif(ref,nbr);
+    bool test2=M.modifEtat(ref,etat);
+    if (test || test2)
     {
-        while (qry.next())
+                QMessageBox::information(nullptr, QObject::tr("database is open"),
+                            QObject::tr("materiel modifier.\n"
+                                        "Click Cancel to exit."), QMessageBox::Cancel);
+    }
+}
+void Dialog::on_pushButton_36_clicked()
+{
+
+    QSqlQueryModel *modal=new QSqlQueryModel();
+        QSqlQuery request;
+       QString type=ui->comboBox->currentText();
+       QString val=ui->rechercheM->text();
+       val="%"+val+"%";
+       if (type=="reference"){
+           request.prepare("SELECT * FROM MATERIEL WHERE REF_MAT LIKE:val order by REF_MAT");
+       }else if (type=="nbr"){
+           request.prepare("SELECT * FROM MATERIEL WHERE NBR_MAT LIKE:val order by NBR_MAT");
+       }else if (type=="etat"){
+           request.prepare("SELECT * FROM MATERIEL WHERE ETAT_MAT LIKE:val order by ETAT_MAT");
+       }
+
+       request.bindValue(":val",val);
+       request.exec();
+       modal->setQuery(request);
+       ui->tableView->setModel(modal);
+}
+
+void Dialog::on_tableView_activated(const QModelIndex &index)
+{
+    QString  val=ui->tableView->model()->data(index).toString();
+        QSqlQuery qry;
+        qry.prepare("SELECT * FROM MATERIEL WHERE REF_MAT=:num");
+        qry.bindValue(":num",val);
+        if (qry.exec())
         {
-            ui->recherche_cin->setText(qry.value(0).toString());
-            ui->recherche_grade->setText(qry.value(1).toString());
-            ui->recherche_presence->setText(qry.value(2).toString());
-            ui->recherche_salaire->setText(qry.value(3).toString());
-            ui->recherche_date->setText(qry.value(4).toString());
+            while (qry.next()) {
+                ui->Ref_3->setText(qry.value(0).toString());
+                ui->QNT_3->setText(qry.value(1).toString());
+                ui->etatM_3->setText(qry.value(2).toString());
+                }
 
         }
-    }
-
-
 }
 
-void Dialog::on_pushButton_4_clicked()
+void Dialog::on_comboBox_activated(const QString &arg1)
 {
-    QString strStream;
-            QTextStream out(&strStream);
-            const int rowCount = ui->tabpersonnel->model()->rowCount();
-            const int columnCount = ui->tabpersonnel->model()->columnCount();
-            for (int column = 0; column < columnCount; column++)
-                if (!ui->tabpersonnel->isColumnHidden(column))
-                    out << QString("<th>%1</th>").arg(ui->tabpersonnel->model()->headerData(column, Qt::Horizontal).toString());
-            for (int row = 0; row < rowCount; row++) {
-                out << "<tr>";
-                for (int column = 0; column < columnCount; column++) {
-                    if (!ui->tabpersonnel->isColumnHidden(column)) {
-                        QString data =ui->tabpersonnel->model()->data(ui->tabpersonnel->model()->index(row, column)).toString().simplified();
-                        out << QString("<td bkcolor=0>%1</td>").arg((!data.isEmpty()) ? data : QString("&nbsp;"));
-                    }
-                }
-            }
-            QTextDocument *document = new QTextDocument();
-            document->setHtml(strStream);
-    QPrinter printer ;
-           QPrintDialog *daddy = new QPrintDialog(&printer, NULL);
-            if (daddy->exec() == QDialog::Accepted) {
-                document->print(&printer);
-            }
-            delete document;
-}
-
-void Dialog::on_pushButton_5_clicked()
-{
-    QString strStream;
-            QTextStream out(&strStream);
-            const int rowCount = ui->tabpersonnel->model()->rowCount();
-            const int columnCount = ui->tabpersonnel->model()->columnCount();
-            for (int column = 0; column < columnCount; column++)
-                if (!ui->tabpersonnel->isColumnHidden(column))
-                   out << QString("<th>%1</th>").arg(ui->tabpersonnel->model()->headerData(column, Qt::Horizontal).toString());
-            for (int row = 0; row < rowCount; row++) {
-                for (int column = 0; column < columnCount; column++) {
-                    if (!ui->tabpersonnel->isColumnHidden(column)) {
-                        QString data =ui->tabpersonnel->model()->data(ui->tabpersonnel->model()->index(row, column)).toString().simplified();
-                        out << QString("<td bkcolor=0>%1</td>").arg((!data.isEmpty()) ? data : QString("&nbsp;"));
-                    }
-                }
-            }
-           QTextDocument *document = new QTextDocument();
-           document->setHtml(strStream);
-           QString fileName = QFileDialog::getSaveFileName((QWidget* )0, "Export PDF", QString(), ".pdf");
-           if (QFileInfo(fileName).suffix().isEmpty()) { fileName.append(".txt.pdf"); }
-           QPrinter printer(QPrinter::PrinterResolution);
-           printer.setOutputFormat(QPrinter::PdfFormat);
-           printer.setPaperSize(QPrinter::A4);
-           printer.setOutputFileName(fileName);
-           QTextDocument doc;
-           doc.setHtml(document->toPlainText());
-            doc.print(&printer);
-}
-
-void Dialog::on_pushButton_6_clicked()
-{
-    QSqlQueryModel *modal=new QSqlQueryModel();
-            QSqlQuery request;
-           QString type=ui->comboBox->currentText();
-           QString val=ui->lineEdit->text();
-           val="%"+val+"%";
-           if (type=="CIN"){
-               request.prepare("SELECT * FROM PERSONNEL WHERE CIN LIKE:val order by CIN");
-           }else if (type=="GRADE"){
-               request.prepare("SELECT * FROM PERSONNEL WHERE GRADE LIKE:val");
-           }else if (type=="SALAIRE"){
-               request.prepare("SELECT * FROM PERSONNEL WHERE SALAIRE LIKE:val");
-           }else if (type=="DATE CONTRAT"){
-               request.prepare("SELECT * FROM PERSONNEL WHERE DATECONTRAT LIKE:val");
-           }
-           request.bindValue(":val",val);
-           request.exec();
-           modal->setQuery(request);
-           ui->tabpersonnel->setModel(modal);
-}
-
-void Dialog::on_pushButton_7_clicked()
-{
-    QSqlQueryModel * modal= new QSqlQueryModel();
-    QSqlQuery request;
-        request.prepare("select * from PERSONNEL order by PRESENCE DESC");
-        request.exec();
-        modal->setQuery(request);
-        ui->tabpersonnel->setModel(modal);
 
 }
-
-void Dialog::on_pushButton_8_clicked()
-{
-    QSqlQueryModel * modal= new QSqlQueryModel();
-    QSqlQuery request;
-        request.prepare("select * from PERSONNEL order by CIN DESC");
-        request.exec();
-        modal->setQuery(request);
-        ui->tabpersonnel->setModel(modal);
-}
-
-
-
