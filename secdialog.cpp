@@ -105,9 +105,9 @@ void SecDialog::on_Csearch_clicked()
    if (type=="Numero"){
        request.prepare("SELECT * FROM CHAMBRE WHERE NUM_CHAMBRE LIKE:val");
    }else if (type=="etat"){
-       request.prepare("SELECT * FROM CHAMBRE WHERE TYPE_CHAMBRE LIKE:val");
-   }else if (type=="type"){
        request.prepare("SELECT * FROM CHAMBRE WHERE ETAT_CHAMBRE LIKE:val");
+   }else if (type=="type"){
+       request.prepare("SELECT * FROM CHAMBRE WHERE TYPE_CHAMBRE LIKE:val");
    }
    request.bindValue(":val",val);
    request.exec();
@@ -182,4 +182,21 @@ void SecDialog::on_pdf_clicked()
 
            doc.setHtml(document->toPlainText());
             doc.print(&printer);
+}
+
+void SecDialog::on_video_clicked()
+{
+video=new MainWindowvideo(this);
+video->show();
+}
+
+void SecDialog::on_pushButton_2_clicked()
+{
+    statCH=new StatChambre(this);
+    statCH->show();
+}
+
+void SecDialog::on_pushButton_3_clicked()
+{
+     close();
 }

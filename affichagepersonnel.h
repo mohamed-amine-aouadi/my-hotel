@@ -1,20 +1,19 @@
-#ifndef DIALOG_H
-#define DIALOG_H
+#ifndef AFFICHAGEPERSONNEL_H
+#define AFFICHAGEPERSONNEL_H
 
 #include <QDialog>
 #include "personnel.h"
-
 namespace Ui {
-class Dialog;
+class affichagepersonnel;
 }
 
-class Dialog : public QDialog
+class affichagepersonnel : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit Dialog(QWidget *parent = nullptr);
-    ~Dialog();
+    explicit affichagepersonnel(QWidget *parent = nullptr);
+    ~affichagepersonnel();
 
 private slots:
     void on_pushButton_2_clicked();
@@ -44,12 +43,9 @@ private slots:
     void on_pushButton_11_clicked();
 
     void on_pushButton_91_clicked();
-
 private:
-    Ui::Dialog *ui;
-
+    Ui::affichagepersonnel *ui;
     PERSONNEL tmppersonnel;
-
 };
 
-#endif // DIALOG_H
+#endif // AFFICHAGEPERSONNEL_H

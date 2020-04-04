@@ -3,7 +3,6 @@
 
 #include <QDialog>
 #include "demande.h"
-#include "qcustomplot.h"
 
 namespace Ui {
 class Affichage;

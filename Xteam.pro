@@ -1,8 +1,6 @@
-QT       += core gui
+QT       += core gui multimedia multimediawidgets
 QT        +=sql
 QT += printsupport
-
-
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 CONFIG += c++11
@@ -19,28 +17,65 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    affichage.cpp \
+    affichagepersonnel.cpp \
+    chambre.cpp \
     connexion.cpp \
-    dialog.cpp \
-    dialog2.cpp \
+    demande.cpp \
+    dialogevenement.cpp \
+    dialogheberg.cpp \
+    dialogmateriaux.cpp \
     evenement.cpp \
+    hebergement.cpp \
     main.cpp \
     mainwindow.cpp \
-    materiaux.cpp
+    mainwindowvideo.cpp \
+    materiaux.cpp \
+    personnel.cpp \
+    qcustomplot.cpp \
+    secdialog.cpp \
+    statchambre.cpp \
+    statevenement.cpp \
+    statistique.cpp
 
 HEADERS += \
+    affichage.h \
+    affichagepersonnel.h \
+    chambre.h \
     connexion.h \
-    dialog.h \
-    dialog2.h \
+    demande.h \
+    dialogevenement.h \
+    dialogheberg.h \
+    dialogmateriaux.h \
     evenement.h \
+    hebergement.h \
     mainwindow.h \
-    materiaux.h
+    mainwindowvideo.h \
+    materiaux.h \
+    personnel.h \
+    qcustomplot.h \
+    secdialog.h \
+    statchambre.h \
+    statevenement.h \
+    statistique.h
 
 FORMS += \
-    dialog.ui \
-    dialog2.ui \
-    mainwindow.ui
+    affichage.ui \
+    affichagepersonnel.ui \
+    dialogevenement.ui \
+    dialogheberg.ui \
+    dialogmateriaux.ui \
+    mainwindow.ui \
+    mainwindowvideo.ui \
+    secdialog.ui \
+    statchambre.ui \
+    statevenement.ui \
+    statistique.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+RESOURCES += \
+    Resources.qrc

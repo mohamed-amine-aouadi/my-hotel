@@ -52,11 +52,13 @@ void DialogHeberg::on_pushButton_clicked()
 
 void DialogHeberg::on_pushButton_2_clicked()
 {
+
     QString num=ui->Search->text();
     QSqlQuery Drequest;
     Drequest.prepare("DELETE FROM HEBERGEMENT WHERE NUMRES=:num");
     Drequest.bindValue(":num",num);
     Drequest.exec();
+
 }
 
 
@@ -258,4 +260,9 @@ void DialogHeberg::on_pushButton_5_clicked()
             }
 
             delete document;
+}
+
+void DialogHeberg::on_pushButton_6_clicked()
+{
+    close();
 }

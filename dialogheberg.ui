@@ -18,12 +18,19 @@
     <rect>
      <x>670</x>
      <y>570</y>
-     <width>211</width>
-     <height>41</height>
+     <width>50</width>
+     <height>50</height>
     </rect>
    </property>
+   <property name="styleSheet">
+    <string notr="true">background-color:tranparent;
+border-image:url(:/images/icones/view.png);
+background:none;
+border:none;
+background-repeat:none;</string>
+   </property>
    <property name="text">
-    <string>show</string>
+    <string/>
    </property>
   </widget>
   <widget class="QTableView" name="tableView1">
@@ -52,20 +59,27 @@
    <property name="geometry">
     <rect>
      <x>770</x>
-     <y>330</y>
-     <width>121</width>
-     <height>31</height>
+     <y>360</y>
+     <width>50</width>
+     <height>50</height>
     </rect>
    </property>
+   <property name="styleSheet">
+    <string notr="true">background-color:tranparent;
+border-image:url(:/images/icones/delete.png);
+background:none;
+border:none;
+background-repeat:none;</string>
+   </property>
    <property name="text">
-    <string>Delete</string>
+    <string/>
    </property>
   </widget>
   <widget class="QLineEdit" name="Search">
    <property name="geometry">
     <rect>
-     <x>590</x>
-     <y>330</y>
+     <x>580</x>
+     <y>370</y>
      <width>161</width>
      <height>31</height>
     </rect>
@@ -177,10 +191,10 @@
   <widget class="QPushButton" name="Tri1">
    <property name="geometry">
     <rect>
-     <x>1040</x>
+     <x>1029</x>
      <y>50</y>
-     <width>150</width>
-     <height>21</height>
+     <width>161</width>
+     <height>31</height>
     </rect>
    </property>
    <property name="text">
@@ -190,10 +204,10 @@
   <widget class="QPushButton" name="pushButton_4">
    <property name="geometry">
     <rect>
-     <x>1040</x>
+     <x>1030</x>
      <y>90</y>
-     <width>151</width>
-     <height>21</height>
+     <width>161</width>
+     <height>31</height>
     </rect>
    </property>
    <property name="text">
@@ -203,20 +217,20 @@
   <widget class="QLineEdit" name="Linesearch">
    <property name="geometry">
     <rect>
-     <x>1120</x>
-     <y>140</y>
+     <x>1100</x>
+     <y>230</y>
      <width>113</width>
-     <height>21</height>
+     <height>31</height>
     </rect>
    </property>
   </widget>
   <widget class="QComboBox" name="comboBox">
    <property name="geometry">
     <rect>
-     <x>1040</x>
-     <y>140</y>
-     <width>72</width>
-     <height>22</height>
+     <x>1020</x>
+     <y>230</y>
+     <width>71</width>
+     <height>31</height>
     </rect>
    </property>
    <item>
@@ -253,10 +267,10 @@
   <widget class="QPushButton" name="pushButton_3">
    <property name="geometry">
     <rect>
-     <x>1160</x>
-     <y>180</y>
-     <width>80</width>
-     <height>21</height>
+     <x>1040</x>
+     <y>270</y>
+     <width>161</width>
+     <height>31</height>
     </rect>
    </property>
    <property name="text">
@@ -266,10 +280,10 @@
   <widget class="QPushButton" name="pdf">
    <property name="geometry">
     <rect>
-     <x>1090</x>
-     <y>270</y>
-     <width>80</width>
-     <height>21</height>
+     <x>1030</x>
+     <y>130</y>
+     <width>161</width>
+     <height>31</height>
     </rect>
    </property>
    <property name="text">
@@ -279,14 +293,34 @@
   <widget class="QPushButton" name="pushButton_5">
    <property name="geometry">
     <rect>
-     <x>1090</x>
-     <y>310</y>
-     <width>80</width>
-     <height>21</height>
+     <x>1030</x>
+     <y>180</y>
+     <width>161</width>
+     <height>31</height>
     </rect>
    </property>
    <property name="text">
     <string>print</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_6">
+   <property name="geometry">
+    <rect>
+     <x>1090</x>
+     <y>560</y>
+     <width>50</width>
+     <height>50</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color:tranparent;
+border-image:url(:/images/icones/quit.png);
+background:none;
+border:none;
+background-repeat:none;</string>
+   </property>
+   <property name="text">
+    <string/>
    </property>
   </widget>
  </widget>

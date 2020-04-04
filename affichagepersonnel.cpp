@@ -1,5 +1,5 @@
-#include "dialog.h"
-#include "ui_dialog.h"
+#include "affichagepersonnel.h"
+#include "ui_affichagepersonnel.h"
 #include <QMessageBox>
 #include <QTabWidget>
 #include <QString>
@@ -19,28 +19,29 @@
 #include <QPrinter>
 #include <QCalendar>
 #endif
-Dialog::Dialog(QWidget *parent) :
+
+affichagepersonnel::affichagepersonnel(QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::Dialog)
+    ui(new Ui::affichagepersonnel)
 {
     ui->setupUi(this);
     ui->recherche_cin->setPlaceholderText("CIN");
-    ui->recherche_grade->setPlaceholderText("GRADE");
-    ui->recherche_salaire->setPlaceholderText("SALAIRE");
-    ui->recherche_date->setPlaceholderText("DATE");
-    ui->recherche_presence->setPlaceholderText("PRESENCE");
+        ui->recherche_grade->setPlaceholderText("GRADE");
+        ui->recherche_salaire->setPlaceholderText("SALAIRE");
+        ui->recherche_date->setPlaceholderText("DATE");
+        ui->recherche_presence->setPlaceholderText("PRESENCE");
 }
 
-Dialog::~Dialog()
+affichagepersonnel::~affichagepersonnel()
 {
     delete ui;
 }
-void Dialog::on_pushButton_3_clicked()
+void affichagepersonnel::on_pushButton_3_clicked()
 {
     ui->tabpersonnel->setModel(tmppersonnel.afficher());
 }
 
-void Dialog::on_pushButton_2_clicked()
+void affichagepersonnel::on_pushButton_2_clicked()
 {
     int cin = ui->recherche_cin->text().toInt();
     bool test=tmppersonnel.supprimer(cin);
@@ -51,7 +52,7 @@ void Dialog::on_pushButton_2_clicked()
                                 "Click Cancel to exit."), QMessageBox::Cancel);
 }
 }
-void Dialog::on_pushButton_clicked()
+void affichagepersonnel::on_pushButton_clicked()
 {
    int cin,presence,salaire;
    QString grade,date;
@@ -75,7 +76,7 @@ void Dialog::on_pushButton_clicked()
 }
 
 
-void Dialog::on_tabpersonnel_activated(const QModelIndex &index)
+void affichagepersonnel::on_tabpersonnel_activated(const QModelIndex &index)
 {
     QString val=ui->tabpersonnel->model()->data(index).toString();
     QSqlQuery qry;
@@ -97,7 +98,7 @@ void Dialog::on_tabpersonnel_activated(const QModelIndex &index)
 
 }
 
-void Dialog::on_pushButton_4_clicked()
+void affichagepersonnel::on_pushButton_4_clicked()
 {
     QString strStream;
             QTextStream out(&strStream);
@@ -125,7 +126,7 @@ void Dialog::on_pushButton_4_clicked()
             delete document;
 }
 
-void Dialog::on_pushButton_5_clicked()
+void affichagepersonnel::on_pushButton_5_clicked()
 {
     QString strStream;
             QTextStream out(&strStream);
@@ -155,7 +156,7 @@ void Dialog::on_pushButton_5_clicked()
             doc.print(&printer);
 }
 
-void Dialog::on_pushButton_6_clicked()
+void affichagepersonnel::on_pushButton_6_clicked()
 {
     QSqlQueryModel *modal=new QSqlQueryModel();
             QSqlQuery request;
@@ -177,7 +178,7 @@ void Dialog::on_pushButton_6_clicked()
            ui->tabpersonnel->setModel(modal);
 }
 
-void Dialog::on_pushButton_7_clicked()
+void affichagepersonnel::on_pushButton_7_clicked()
 {
     QSqlQueryModel * modal= new QSqlQueryModel();
     QSqlQuery request;
@@ -188,7 +189,7 @@ void Dialog::on_pushButton_7_clicked()
 
 }
 
-void Dialog::on_pushButton_8_clicked()
+void affichagepersonnel::on_pushButton_8_clicked()
 {
     QSqlQueryModel * modal= new QSqlQueryModel();
     QSqlQuery request;
@@ -200,13 +201,5 @@ void Dialog::on_pushButton_8_clicked()
 
 
 
-
-/*void Dialog::on_pushButton_9_clicked()
-{
-    statistique = new Statistique (this);
-    statistique->show();
-
-}
-*/
 
 

@@ -2,6 +2,8 @@
 #define SECDIALOG_H
 
 #include <QDialog>
+#include "mainwindowvideo.h"
+#include "statchambre.h"
 
 namespace Ui {
 class SecDialog;
@@ -32,8 +34,16 @@ private slots:
 
     void on_pdf_clicked();
 
+    void on_video_clicked();
+
+    void on_pushButton_2_clicked();
+
+    void on_pushButton_3_clicked();
+
 private:
     Ui::SecDialog *ui;
+    MainWindowvideo *video;
+    StatChambre *statCH;
 };
 
 #endif // SECDIALOG_H

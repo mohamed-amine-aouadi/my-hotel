@@ -32,45 +32,59 @@
   <widget class="QPushButton" name="pushButton">
    <property name="geometry">
     <rect>
-     <x>460</x>
+     <x>399</x>
      <y>270</y>
-     <width>80</width>
-     <height>21</height>
+     <width>50</width>
+     <height>50</height>
     </rect>
    </property>
+   <property name="styleSheet">
+    <string notr="true">background-color:tranparent;
+border-image:url(:/images/icones/view.png);
+background:none;
+border:none;
+background-repeat:none;</string>
+   </property>
    <property name="text">
-    <string>show</string>
+    <string/>
    </property>
   </widget>
   <widget class="QPushButton" name="delete_2">
    <property name="geometry">
     <rect>
-     <x>310</x>
-     <y>270</y>
-     <width>80</width>
-     <height>21</height>
+     <x>770</x>
+     <y>250</y>
+     <width>50</width>
+     <height>50</height>
     </rect>
    </property>
+   <property name="styleSheet">
+    <string notr="true">background-color:tranparent;
+border-image:url(:/images/icones/delete.png);
+background:none;
+border:none;
+background-repeat:none;</string>
+   </property>
    <property name="text">
-    <string>delete</string>
+    <string/>
    </property>
   </widget>
   <widget class="QLineEdit" name="search">
    <property name="geometry">
     <rect>
-     <x>170</x>
-     <y>270</y>
-     <width>113</width>
-     <height>21</height>
+     <x>640</x>
+     <y>260</y>
+     <width>121</width>
+     <height>31</height>
     </rect>
    </property>
   </widget>
   <widget class="QPushButton" name="update">
    <property name="geometry">
     <rect>
-     <x>780</x>
-     <y>220</y>
-     <width>80</width>
+     <x>640</x>
+     <y>140</y>
+     <width>111</width>
      <height>21</height>
     </rect>
    </property>
@@ -81,8 +95,8 @@
   <widget class="QLineEdit" name="lineEdit">
    <property name="geometry">
     <rect>
-     <x>660</x>
-     <y>60</y>
+     <x>640</x>
+     <y>20</y>
      <width>113</width>
      <height>21</height>
     </rect>
@@ -91,8 +105,8 @@
   <widget class="QLineEdit" name="lineEdit_2">
    <property name="geometry">
     <rect>
-     <x>650</x>
-     <y>100</y>
+     <x>640</x>
+     <y>50</y>
      <width>113</width>
      <height>21</height>
     </rect>
@@ -101,8 +115,8 @@
   <widget class="QLineEdit" name="lineEdit_3">
    <property name="geometry">
     <rect>
-     <x>650</x>
-     <y>140</y>
+     <x>640</x>
+     <y>80</y>
      <width>113</width>
      <height>21</height>
     </rect>
@@ -111,8 +125,8 @@
   <widget class="QLineEdit" name="lineEdit_4">
    <property name="geometry">
     <rect>
-     <x>650</x>
-     <y>190</y>
+     <x>640</x>
+     <y>110</y>
      <width>113</width>
      <height>21</height>
     </rect>
@@ -121,8 +135,8 @@
   <widget class="QPushButton" name="tri">
    <property name="geometry">
     <rect>
-     <x>580</x>
-     <y>270</y>
+     <x>780</x>
+     <y>20</y>
      <width>101</width>
      <height>21</height>
     </rect>
@@ -134,9 +148,9 @@
   <widget class="QComboBox" name="comboBox">
    <property name="geometry">
     <rect>
-     <x>720</x>
-     <y>270</y>
-     <width>72</width>
+     <x>630</x>
+     <y>180</y>
+     <width>101</width>
      <height>22</height>
     </rect>
    </property>
@@ -159,9 +173,9 @@
   <widget class="QLineEdit" name="combo">
    <property name="geometry">
     <rect>
-     <x>800</x>
-     <y>270</y>
-     <width>91</width>
+     <x>740</x>
+     <y>180</y>
+     <width>101</width>
      <height>21</height>
     </rect>
    </property>
@@ -169,9 +183,9 @@
   <widget class="QPushButton" name="Csearch">
    <property name="geometry">
     <rect>
-     <x>760</x>
-     <y>300</y>
-     <width>80</width>
+     <x>840</x>
+     <y>180</y>
+     <width>51</width>
      <height>21</height>
     </rect>
    </property>
@@ -182,9 +196,9 @@
   <widget class="QPushButton" name="pdf">
    <property name="geometry">
     <rect>
-     <x>590</x>
-     <y>300</y>
-     <width>80</width>
+     <x>780</x>
+     <y>80</y>
+     <width>101</width>
      <height>21</height>
     </rect>
    </property>
@@ -195,14 +209,60 @@
   <widget class="QPushButton" name="print">
    <property name="geometry">
     <rect>
-     <x>480</x>
-     <y>300</y>
-     <width>80</width>
+     <x>780</x>
+     <y>50</y>
+     <width>101</width>
      <height>21</height>
     </rect>
    </property>
    <property name="text">
     <string>print</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="video">
+   <property name="geometry">
+    <rect>
+     <x>780</x>
+     <y>140</y>
+     <width>101</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>videos </string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_2">
+   <property name="geometry">
+    <rect>
+     <x>780</x>
+     <y>110</y>
+     <width>101</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>statistique</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_3">
+   <property name="geometry">
+    <rect>
+     <x>60</x>
+     <y>270</y>
+     <width>50</width>
+     <height>50</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color:tranparent;
+border-image:url(:/images/icones/quit.png);
+background:none;
+border:none;
+background-repeat:none;</string>
+   </property>
+   <property name="text">
+    <string/>
    </property>
   </widget>
  </widget>

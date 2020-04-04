@@ -29,4 +29,3 @@ query.bindValue(":cap",CAPACITE);
 
 return query.exec();
 }
-
