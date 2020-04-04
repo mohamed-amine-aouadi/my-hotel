@@ -221,14 +221,17 @@
     <bool>true</bool>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton">
+  <widget class="QPushButton" name="pushButton_37">
    <property name="geometry">
     <rect>
-     <x>520</x>
+     <x>510</x>
      <y>200</y>
-     <width>75</width>
-     <height>23</height>
+     <width>91</width>
+     <height>21</height>
     </rect>
+   </property>
+   <property name="autoFillBackground">
+    <bool>true</bool>
    </property>
    <property name="text">
     <string>stat</string>

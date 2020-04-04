@@ -1,4 +1,4 @@
-QT       += core gui multimedia multimediawidgets
+QT       += core gui
 QT        +=sql
 QT += printsupport
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
@@ -19,43 +19,33 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     affichage.cpp \
     affichagepersonnel.cpp \
-    chambre.cpp \
     connexion.cpp \
     demande.cpp \
     dialogevenement.cpp \
-    dialogheberg.cpp \
     dialogmateriaux.cpp \
     evenement.cpp \
     hebergement.cpp \
     main.cpp \
     mainwindow.cpp \
-    mainwindowvideo.cpp \
     materiaux.cpp \
     personnel.cpp \
     qcustomplot.cpp \
-    secdialog.cpp \
-    statchambre.cpp \
     statevenement.cpp \
     statistique.cpp
 
 HEADERS += \
     affichage.h \
     affichagepersonnel.h \
-    chambre.h \
     connexion.h \
     demande.h \
     dialogevenement.h \
-    dialogheberg.h \
     dialogmateriaux.h \
     evenement.h \
     hebergement.h \
     mainwindow.h \
-    mainwindowvideo.h \
     materiaux.h \
     personnel.h \
     qcustomplot.h \
-    secdialog.h \
-    statchambre.h \
     statevenement.h \
     statistique.h
 
@@ -63,12 +53,8 @@ FORMS += \
     affichage.ui \
     affichagepersonnel.ui \
     dialogevenement.ui \
-    dialogheberg.ui \
     dialogmateriaux.ui \
     mainwindow.ui \
-    mainwindowvideo.ui \
-    secdialog.ui \
-    statchambre.ui \
     statevenement.ui \
     statistique.ui
 
@@ -76,6 +62,3 @@ FORMS += \
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
-
-RESOURCES += \
-    Resources.qrc

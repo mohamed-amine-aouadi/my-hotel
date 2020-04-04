@@ -36,7 +36,7 @@ void statevenement::makePolt()
     QVector<QString> labels;
     ticks << 1 << 2 ;
 
-    labels << ">100 per" << "<100 per" ;
+    labels << ">100 personne" << "<100 personne" ;
     QSharedPointer<QCPAxisTickerText> textTicker(new QCPAxisTickerText);
     textTicker->addTicks(ticks, labels);
     ui->customPlot->xAxis->setTicker(textTicker);
@@ -79,6 +79,8 @@ while (query1.next()) {
                            nbr = query2.value(0).toInt();
 
                              }
+
+
     regenData << he << nbr ;
     regen->setData(ticks, regenData);
 

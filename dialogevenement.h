@@ -4,6 +4,7 @@
 #include <QDialog>
 #include "evenement.h"
 #include "statevenement.h"
+
 namespace Ui {
 class DialogEvenement;
 }
@@ -31,12 +32,13 @@ private slots:
 
     void on_tableView_2_activated(const QModelIndex &index);
 
-    void on_pushButton_clicked();
+    void on_pushButton_37_clicked();
 
 private:
     Ui::DialogEvenement *ui;
     evenement tmpE ;
-       statevenement *secPage;
+    statevenement *secPage;
+
 
 };
 

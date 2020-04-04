@@ -181,8 +181,8 @@ void DialogEvenement::on_tableView_2_activated(const QModelIndex &index)
         }
 }
 
-void DialogEvenement::on_pushButton_clicked()
+void DialogEvenement::on_pushButton_37_clicked()
 {
     secPage =new statevenement(this);
-        secPage->show();
+            secPage->show();
 }

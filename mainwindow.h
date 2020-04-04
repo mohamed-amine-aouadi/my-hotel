@@ -9,9 +9,6 @@
 #include "dialogmateriaux.h"
 #include "dialogevenement.h"
 #include "statistique.h"
-#include "dialogheberg.h"
-#include "secdialog.h"
-
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -61,16 +58,6 @@ private slots:
 
     void on_pushButton_clicked();
 
-    void on_pushButton_5_clicked();
-
-    void on_pushButton_6_clicked();
-
-    void on_pushButton_8_clicked();
-
-    void on_pushButton_9_clicked();
-
-    void on_TYPE_DEMANDE_activated(const QString &arg1);
-
 private:
     Ui::MainWindow *ui;
     affichagepersonnel *secPage;
@@ -80,8 +67,6 @@ private:
     dialogMateriaux *d;
     DialogEvenement *d2;
     Statistique *statistique ;
-    DialogHeberg *HebergPage;
-    SecDialog *secP;
 
 
 };
