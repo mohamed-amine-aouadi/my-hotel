@@ -2,16 +2,27 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include "personnel.h"
-#include "affichagepersonnel.h"
-#include "affichage.h"
-#include "demande.h"
-#include "dialogmateriaux.h"
-#include "dialogevenement.h"
-#include "statistique.h"
+#include "animation.h"
+#include "equipement.h"
+#include "update.h"
+#include <QPrintDialog>
+#include <QPrinter>
+#include <QDialog>
+#include <QSystemTrayIcon>
+#include "qcustomplot.h"
+#include "modif.h"
+#include "pdf.h"
+#include "modifier.h"
+
+
+
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
+
+
+
 
 class MainWindow : public QMainWindow
 {
@@ -22,6 +33,46 @@ public:
     ~MainWindow();
 
 private slots:
+    //me
+    void on_pb_ajouter_clicked();
+
+    void on_pb_ajout_clicked();
+
+    void on_pb_supprimer_5_clicked();
+
+    void on_pb_supprimer_3_clicked();
+
+    void on_pb_modifier_clicked();
+
+
+
+    void on_pb_modifier_2_clicked();
+
+    void on_Rechercher_2_clicked();
+
+
+    void on_trie_asc_clicked();
+
+    void on_trie_desc_clicked();
+
+   void on_Rechercher_3_clicked();
+
+
+   void on_trie_asc_2_clicked();
+
+   void on_trie_desc_2_clicked();
+
+   void on_imprimer_paie_clicked();
+
+   void on_commandLinkButton_2_clicked();
+
+   void on_statistique_clicked();
+   void on_pushButton_imprimer_4_clicked();
+   void on_update_clicked();
+   void on_pdf_clicked();
+    void on_pdf_2_clicked();
+    void on_resaisir_clicked();
+
 
 
     void on_pushButton_4_clicked();
@@ -40,33 +91,35 @@ private slots:
 
     void on_pushButton_27_clicked();
 
-    void on_pushButton_10_clicked();
+    void on_actionPrint_clicked();
 
-    void on_pushButton_12_clicked();
+    void on_actionQuit_triggered();
 
-    void on_pushButton_13_clicked();
+    void on_actionAbout_Me_triggered();
 
-    void on_pushButton_15_clicked();
+    void on_actionAbout_QT_triggered();
 
-    void on_pushButton_18_clicked();
+    void on_actionPrint_2_triggered();
+     void makePlot();
+     void on_updatee_clicked();
 
-    void on_pushButton_16_clicked();
+     void on_modifier_clicked();
 
-    void on_pushButton_19_clicked();
-
-    void on_pushButton_21_clicked();
-
-    void on_pushButton_clicked();
+     void on_modifier_2_clicked();
 
 private:
     Ui::MainWindow *ui;
-    affichagepersonnel *secPage;
-    Affichage *secPag;
-    PERSONNEL tmppersonnel;
-    demande tmpdemande;
-    dialogMateriaux *d;
-    DialogEvenement *d2;
-    Statistique *statistique ;
+    Animation tmpanim;
+    Animation tmpanime;
+
+    Equipement tmpequip;
+    Equipement tmpequipement;
+
+
+    modif *up;
+    pdf *go;
+    modifier *yes;
+
 
 
 };
