@@ -261,8 +261,3 @@ void DialogHeberg::on_pushButton_5_clicked()
 
             delete document;
 }
-
-void DialogHeberg::on_pushButton_6_clicked()
-{
-    close();
-}

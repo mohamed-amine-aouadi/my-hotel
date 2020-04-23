@@ -14,8 +14,6 @@ int main(int argc, char *argv[])
         QMessageBox::critical(nullptr, QObject::tr("database is open"),
                     QObject::tr("connection successful.\n"
                                 "Click Cancel to exit."), QMessageBox::Cancel);
-
-
 }
 
 
