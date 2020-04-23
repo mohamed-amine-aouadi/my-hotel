@@ -7,6 +7,18 @@
         <file>icones/quit.png</file>
         <file>icones/save.png</file>
         <file>icones/view.png</file>
+        <file>icones/back.jpg</file>
+        <file>icones/add.png</file>
+        <file>icones/afficher.png</file>
         <file>icones/delete.png</file>
+        <file>icones/exit.png</file>
+        <file>icones/stat.png</file>
+        <file>icones/update.png</file>
+        <file>icones/check.png</file>
+        <file>icones/close.png</file>
+        <file>icones/reference.png</file>
+        <file>icones/focus.png</file>
+        <file>icones/printer.png</file>
+        <file>icones/pdf.png</file>
     </qresource>
 </RCC>

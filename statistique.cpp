@@ -3,24 +3,20 @@
 #include "qcustomplot.h"
 #include"QSqlRecord"
 #include"QSqlQuery"
-
-
-statistique::statistique(QWidget *parent) :
-    QMainWindow(parent),
-    ui(new Ui::statistique)
+Statistique::Statistique(QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::Statistique)
 {
     ui->setupUi(this);
     this->setWindowTitle("statistiques");
-    makePolt();
+        makePolt();
 }
 
-statistique::~statistique()
+Statistique::~Statistique()
 {
     delete ui;
 }
-
-
-void statistique::makePolt()
+void Statistique::makePolt()
 {
     QLinearGradient gradient(0, 0, 0, 400);
     gradient.setColorAt(0, QColor(90, 90, 90));
@@ -30,17 +26,17 @@ void statistique::makePolt()
     QCPBars *regen = new QCPBars(ui->customPlot->xAxis, ui->customPlot->yAxis);
     regen->setAntialiased(false);
     regen->setStackingGap(1);
-    regen->setName("Nombre d'equipement statistique");
-    regen->setPen(QPen(QColor(111, 9, 176).lighter(170)));
-    regen->setBrush(QColor(111, 9, 176));
+    regen->setName("Stat pandoud");
+    regen->setPen(QPen(QColor(0, 168, 140).lighter(130)));
+    regen->setBrush(QColor(0, 168, 140));
 
 
     // prepare x axis with country labels:
     QVector<double> ticks;
     QVector<QString> labels;
-    ticks << 1 << 2 << 3 ;
+    ticks << 1 << 2 ;
 
-    labels << "NB=10" << "NB > 10" << "NB = 0" ;
+    labels << ">1500 DT/M" << "<1500 DT/M" ;
     QSharedPointer<QCPAxisTickerText> textTicker(new QCPAxisTickerText);
     textTicker->addTicks(ticks, labels);
     ui->customPlot->xAxis->setTicker(textTicker);
@@ -58,7 +54,6 @@ void statistique::makePolt()
     // prepare y axis:
     ui->customPlot->yAxis->setRange(0,20);
     ui->customPlot->yAxis->setPadding(5); // a bit more space to the left border
-     ui->customPlot->yAxis->setLabel("Nombre des equipement \n par % Année 2020 ");
     ui->customPlot->yAxis->setBasePen(QPen(Qt::white));
     ui->customPlot->yAxis->setTickPen(QPen(Qt::white));
     ui->customPlot->yAxis->setSubTickPen(QPen(Qt::white));
@@ -71,28 +66,20 @@ void statistique::makePolt()
     // Add data:
     QVector<double> regenData;
 int nbr;
-int yos;
 int he;
-QSqlQuery query1("select count(*) from equipement where NB = 10 ");
+QSqlQuery query1("select count(*) from PERSONNEL where SALAIRE > 1500 ");
 while (query1.next()) {
 
                         he = query1.value(0).toInt();
 
                                                     }
 
-    QSqlQuery query2("select count(*) from equipement where NB > 10 ");
+    QSqlQuery query2("select count(*) from PERSONNEL where SALAIRE < 1500 ");
     while (query2.next()) {
                            nbr = query2.value(0).toInt();
 
                              }
-
-    QSqlQuery queri("select count(*) from equipement where NB = 0 ");
-    while (queri.next()) {
-                           yos = queri.value(0).toInt();
-
-                             }
-
-    regenData << he << nbr << yos ;
+    regenData << he << nbr ;
     regen->setData(ticks, regenData);
 
     // setup legend:

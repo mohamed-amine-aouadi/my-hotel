@@ -5,24 +5,21 @@
 #include"connexion.h"
 #include "qcustomplot.h"
 #include <QWidget>
-
-#include <QMainWindow>
-
 namespace Ui {
-class statistique;
+class Statistique;
 }
 
-class statistique : public QMainWindow
+class Statistique : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit statistique(QWidget *parent = nullptr);
-    ~statistique();
+    explicit Statistique(QWidget *parent = nullptr);
+    ~Statistique();
     void makePolt();
 
 private:
-    Ui::statistique *ui;
+    Ui::Statistique *ui;
 };
 
 #endif // STATISTIQUE_H

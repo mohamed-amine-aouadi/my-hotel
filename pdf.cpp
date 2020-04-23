@@ -2,7 +2,7 @@
 #include "ui_pdf.h"
 #include <QTabWidget>
 #include "animation.h"
-#include "equipement.h"
+//#include "equipement.h"
 #include <QMessageBox>
 #include <QPixmap>
 #include <QPrintDialog>
@@ -142,3 +142,28 @@ void pdf::on_pushButton_imprimer_4_clicked()
 {
     pdffonction();
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

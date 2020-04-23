@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>639</width>
-    <height>496</height>
+    <width>468</width>
+    <height>356</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,8 +16,8 @@
   <widget class="QLabel" name="label_60">
    <property name="geometry">
     <rect>
-     <x>240</x>
-     <y>240</y>
+     <x>170</x>
+     <y>170</y>
      <width>55</width>
      <height>16</height>
     </rect>
@@ -34,8 +34,8 @@ font:bold large;</string>
   <widget class="QPushButton" name="pushButton_imprimer_4">
    <property name="geometry">
     <rect>
-     <x>360</x>
-     <y>300</y>
+     <x>240</x>
+     <y>210</y>
      <width>111</width>
      <height>31</height>
     </rect>
@@ -55,8 +55,8 @@ font:bold large;</string>
   <widget class="QLineEdit" name="lineEdit_code_pdf_3">
    <property name="geometry">
     <rect>
-     <x>360</x>
-     <y>240</y>
+     <x>240</x>
+     <y>170</y>
      <width>113</width>
      <height>22</height>
     </rect>
@@ -65,8 +65,8 @@ font:bold large;</string>
   <widget class="QComboBox" name="comboBox_type_pdf_3">
    <property name="geometry">
     <rect>
-     <x>360</x>
-     <y>180</y>
+     <x>240</x>
+     <y>130</y>
      <width>111</width>
      <height>26</height>
     </rect>
@@ -85,8 +85,8 @@ font:bold large;</string>
   <widget class="QLabel" name="label_59">
    <property name="geometry">
     <rect>
-     <x>240</x>
-     <y>180</y>
+     <x>170</x>
+     <y>130</y>
      <width>55</width>
      <height>21</height>
     </rect>

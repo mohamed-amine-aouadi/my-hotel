@@ -5,12 +5,12 @@
 #include <QMainWindow>
 #include "animation.h"
 #include "equipement.h"
-#include "update.h"
+//#include "update.h"
 #include <QPrintDialog>
 #include <QPrinter>
 #include <QSystemTrayIcon>
 #include "qcustomplot.h"
-#include "modif.h"
+//#include "modif.h"
 
 namespace Ui {
 class pdf;

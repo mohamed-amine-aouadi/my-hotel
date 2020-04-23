@@ -1,7 +1,7 @@
-QT       += core gui
+QT       += core gui multimedia multimediawidgets
 QT        +=sql
-
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport multimedia
+QT += printsupport
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 CONFIG += c++11
 
@@ -18,32 +18,50 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     animation.cpp \
+    chambre.cpp \
     connexion.cpp \
+    demande.cpp \
     equipement.cpp \
+    evenement.cpp \
+    hebergement.cpp \
+    historique.cpp \
     main.cpp \
     mainwindow.cpp \
-    modif.cpp \
-    modifier.cpp \
+    mainwindowvideo.cpp \
+    materiaux.cpp \
     pdf.cpp \
+    personnel.cpp \
     qcustomplot.cpp \
+    statchambre.cpp \
+    statevenement.cpp \
+    statistiq.cpp \
     statistique.cpp
 
 HEADERS += \
     animation.h \
+    chambre.h \
     connexion.h \
-    equipement.h \
+    demande.h \
+    evenement.h \
+    hebergement.h \
     mainwindow.h \
-    modif.h \
-    modifier.h \
+    mainwindowvideo.h \
+    materiaux.h \
     pdf.h \
+    personnel.h \
     qcustomplot.h \
+    statchambre.h \
+    statevenement.h \
+    statistiq.h \
     statistique.h
 
 FORMS += \
     mainwindow.ui \
-    modif.ui \
-    modifier.ui \
+    mainwindowvideo.ui \
     pdf.ui \
+    statchambre.ui \
+    statevenement.ui \
+    statistiq.ui \
     statistique.ui
 
 # Default rules for deployment.
@@ -52,4 +70,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 RESOURCES += \
-    resour.qrc
+    Resources.qrc
+
+DISTFILES += \
+    historique.txt

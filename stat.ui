@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Statistique</class>
- <widget class="QDialog" name="Statistique">
+ <class>stat</class>
+ <widget class="QDialog" name="stat">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>531</width>
-    <height>307</height>
+    <width>754</width>
+    <height>322</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,8 +16,8 @@
   <widget class="QCustomPlot" name="customPlot" native="true">
    <property name="geometry">
     <rect>
-     <x>0</x>
-     <y>10</y>
+     <x>110</x>
+     <y>30</y>
      <width>511</width>
      <height>261</height>
     </rect>
