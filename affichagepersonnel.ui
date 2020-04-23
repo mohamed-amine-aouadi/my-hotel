@@ -16,23 +16,30 @@
   <widget class="QPushButton" name="pushButton_3">
    <property name="geometry">
     <rect>
-     <x>630</x>
-     <y>150</y>
-     <width>75</width>
-     <height>23</height>
+     <x>300</x>
+     <y>370</y>
+     <width>50</width>
+     <height>50</height>
     </rect>
    </property>
+   <property name="styleSheet">
+    <string notr="true">background-color:tranparent;
+border-image:url(:/images/icones/afficher.png);
+background:none;
+border:none;
+background-repeat:none;</string>
+   </property>
    <property name="text">
-    <string>Afficher</string>
+    <string/>
    </property>
   </widget>
   <widget class="QPushButton" name="pushButton_7">
    <property name="geometry">
     <rect>
      <x>630</x>
-     <y>120</y>
+     <y>110</y>
      <width>75</width>
-     <height>23</height>
+     <height>20</height>
     </rect>
    </property>
    <property name="text">
@@ -42,35 +49,49 @@
   <widget class="QPushButton" name="pushButton_5">
    <property name="geometry">
     <rect>
-     <x>630</x>
-     <y>180</y>
-     <width>75</width>
-     <height>23</height>
+     <x>420</x>
+     <y>370</y>
+     <width>50</width>
+     <height>50</height>
     </rect>
    </property>
+   <property name="styleSheet">
+    <string notr="true">background-color:tranparent;
+border-image:url(:/images/icones/pdf.png);
+background:none;
+border:none;
+background-repeat:none;</string>
+   </property>
    <property name="text">
-    <string>PDF</string>
+    <string/>
    </property>
   </widget>
   <widget class="QPushButton" name="pushButton_2">
    <property name="geometry">
     <rect>
-     <x>750</x>
-     <y>300</y>
-     <width>81</width>
-     <height>23</height>
+     <x>790</x>
+     <y>270</y>
+     <width>30</width>
+     <height>30</height>
     </rect>
    </property>
+   <property name="styleSheet">
+    <string notr="true">background-color:tranparent;
+border-image:url(:/images/icones/delete.png);
+background:none;
+border:none;
+background-repeat:none;</string>
+   </property>
    <property name="text">
-    <string>supprimer</string>
+    <string/>
    </property>
   </widget>
   <widget class="QLineEdit" name="recherche_date">
    <property name="geometry">
     <rect>
      <x>750</x>
-     <y>250</y>
-     <width>171</width>
+     <y>230</y>
+     <width>161</width>
      <height>20</height>
     </rect>
    </property>
@@ -79,8 +100,8 @@
    <property name="geometry">
     <rect>
      <x>750</x>
-     <y>130</y>
-     <width>171</width>
+     <y>110</y>
+     <width>161</width>
      <height>20</height>
     </rect>
    </property>
@@ -88,10 +109,10 @@
   <widget class="QComboBox" name="comboBox">
    <property name="geometry">
     <rect>
-     <x>390</x>
-     <y>300</y>
-     <width>62</width>
-     <height>22</height>
+     <x>630</x>
+     <y>30</y>
+     <width>75</width>
+     <height>20</height>
     </rect>
    </property>
    <item>
@@ -124,8 +145,8 @@
    <property name="geometry">
     <rect>
      <x>750</x>
-     <y>170</y>
-     <width>171</width>
+     <y>150</y>
+     <width>161</width>
      <height>20</height>
     </rect>
    </property>
@@ -134,8 +155,8 @@
    <property name="geometry">
     <rect>
      <x>750</x>
-     <y>90</y>
-     <width>171</width>
+     <y>70</y>
+     <width>161</width>
      <height>20</height>
     </rect>
    </property>
@@ -144,8 +165,8 @@
    <property name="geometry">
     <rect>
      <x>750</x>
-     <y>210</y>
-     <width>171</width>
+     <y>190</y>
+     <width>161</width>
      <height>20</height>
     </rect>
    </property>
@@ -154,45 +175,39 @@
    <property name="geometry">
     <rect>
      <x>40</x>
-     <y>90</y>
+     <y>30</y>
      <width>531</width>
-     <height>201</height>
+     <height>261</height>
     </rect>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="pushButton_91">
-   <property name="geometry">
-    <rect>
-     <x>630</x>
-     <y>250</y>
-     <width>75</width>
-     <height>23</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>STAT</string>
    </property>
   </widget>
   <widget class="QPushButton" name="pushButton">
    <property name="geometry">
     <rect>
      <x>840</x>
-     <y>300</y>
-     <width>81</width>
-     <height>23</height>
+     <y>270</y>
+     <width>30</width>
+     <height>30</height>
     </rect>
    </property>
+   <property name="styleSheet">
+    <string notr="true">background-color:tranparent;
+border-image:url(:/images/icones/update.png);
+background:none;
+border:none;
+background-repeat:none;</string>
+   </property>
    <property name="text">
-    <string>modifier</string>
+    <string/>
    </property>
   </widget>
   <widget class="QPushButton" name="pushButton_8">
    <property name="geometry">
     <rect>
      <x>630</x>
-     <y>90</y>
+     <y>70</y>
      <width>75</width>
-     <height>23</height>
+     <height>20</height>
     </rect>
    </property>
    <property name="text">
@@ -202,22 +217,29 @@
   <widget class="QPushButton" name="pushButton_4">
    <property name="geometry">
     <rect>
-     <x>630</x>
-     <y>210</y>
-     <width>75</width>
-     <height>23</height>
+     <x>530</x>
+     <y>370</y>
+     <width>50</width>
+     <height>50</height>
     </rect>
    </property>
+   <property name="styleSheet">
+    <string notr="true">background-color:tranparent;
+border-image:url(:/images/icones/printer.png);
+background:none;
+border:none;
+background-repeat:none;</string>
+   </property>
    <property name="text">
-    <string>Print</string>
+    <string/>
    </property>
   </widget>
   <widget class="QLineEdit" name="lineEdit">
    <property name="geometry">
     <rect>
-     <x>460</x>
-     <y>300</y>
-     <width>113</width>
+     <x>750</x>
+     <y>30</y>
+     <width>161</width>
      <height>20</height>
     </rect>
    </property>
@@ -225,16 +247,60 @@
   <widget class="QPushButton" name="pushButton_6">
    <property name="geometry">
     <rect>
-     <x>640</x>
-     <y>300</y>
-     <width>75</width>
-     <height>23</height>
+     <x>920</x>
+     <y>30</y>
+     <width>30</width>
+     <height>30</height>
     </rect>
    </property>
+   <property name="styleSheet">
+    <string notr="true">background-color:tranparent;
+border-image:url(:/images/icones/focus.png);
+background:none;
+border:none;
+background-repeat:none;</string>
+   </property>
    <property name="text">
-    <string>recherche</string>
+    <string/>
    </property>
   </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>961</width>
+     <height>431</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color:tranparent;
+border-image:url(:/images/icones/back.jpg);
+background:none;
+border:none;
+background-repeat:none;</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <zorder>label</zorder>
+  <zorder>pushButton_3</zorder>
+  <zorder>pushButton_7</zorder>
+  <zorder>pushButton_5</zorder>
+  <zorder>pushButton_2</zorder>
+  <zorder>recherche_date</zorder>
+  <zorder>recherche_grade</zorder>
+  <zorder>comboBox</zorder>
+  <zorder>recherche_presence</zorder>
+  <zorder>recherche_cin</zorder>
+  <zorder>recherche_salaire</zorder>
+  <zorder>tabpersonnel</zorder>
+  <zorder>pushButton</zorder>
+  <zorder>pushButton_8</zorder>
+  <zorder>pushButton_4</zorder>
+  <zorder>lineEdit</zorder>
+  <zorder>pushButton_6</zorder>
  </widget>
  <resources/>
  <connections/>

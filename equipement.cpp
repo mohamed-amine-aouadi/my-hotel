@@ -62,8 +62,8 @@ QSqlQueryModel * Equipement::afficher_2()
 model->setQuery("select * from equipement");
 model->setHeaderData(0, Qt::Horizontal, QObject::tr("ID"));
 model->setHeaderData(1, Qt::Horizontal, QObject::tr("TYPE "));
-model->setHeaderData(2, Qt::Horizontal, QObject::tr("NB"));
-model->setHeaderData(2, Qt::Horizontal, QObject::tr("IDANIMATION"));
+model->setHeaderData(2, Qt::Horizontal, QObject::tr("NOMBRE"));
+model->setHeaderData(3, Qt::Horizontal, QObject::tr("IDANIMATION"));
 
     return model;
 }
@@ -121,8 +121,8 @@ QSqlQueryModel * Equipement::afficherdesc_2()
 model->setQuery("select * from equipement order by ID desc");
 model->setHeaderData(0, Qt::Horizontal, QObject::tr("ID"));
 model->setHeaderData(1, Qt::Horizontal, QObject::tr("TYPE "));
-model->setHeaderData(2, Qt::Horizontal, QObject::tr("NB"));
-model->setHeaderData(2, Qt::Horizontal, QObject::tr("IDANIMATION"));
+model->setHeaderData(2, Qt::Horizontal, QObject::tr("NOMBRE"));
+model->setHeaderData(3, Qt::Horizontal, QObject::tr("IDANIMATION"));
     return model;
 }
 
@@ -131,8 +131,8 @@ QSqlQueryModel * Equipement::afficherasc_2()
     model->setQuery("select * from equipement order by ID asc");
     model->setHeaderData(0, Qt::Horizontal, QObject::tr("ID"));
     model->setHeaderData(1, Qt::Horizontal, QObject::tr("TYPE "));
-    model->setHeaderData(2, Qt::Horizontal, QObject::tr("NB"));
-    model->setHeaderData(2, Qt::Horizontal, QObject::tr("IDANIMATION"));
+    model->setHeaderData(2, Qt::Horizontal, QObject::tr("NOMBRE"));
+    model->setHeaderData(3, Qt::Horizontal, QObject::tr("IDANIMATION"));
     return model;
 }
 
