@@ -8,7 +8,7 @@ class demande
 {
 public:
     demande();
-    demande(int,QString,int,int,QString);
+    demande(int,int,QString,int,int,QString);
     int get_cin();
     int get_etat();
     int get_ref();

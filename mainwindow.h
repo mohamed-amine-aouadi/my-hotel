@@ -9,8 +9,8 @@
 #include "dialogmateriaux.h"
 #include "dialogevenement.h"
 #include "statistique.h"
-#include "dialogheberg.h"
-#include "secdialog.h"
+#include "materiaux.h"
+#include "evenement.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -23,6 +23,9 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+
+    void makePolt();
+
 
 private slots:
 
@@ -51,7 +54,6 @@ private slots:
 
     void on_pushButton_15_clicked();
 
-    void on_pushButton_18_clicked();
 
     void on_pushButton_16_clicked();
 
@@ -61,15 +63,47 @@ private slots:
 
     void on_pushButton_clicked();
 
-    void on_pushButton_5_clicked();
+    void on_pushButton_18_clicked();
 
-    void on_pushButton_6_clicked();
+    void on_pushButton_31_clicked();
 
-    void on_pushButton_8_clicked();
+    void on_tableView_activated(const QModelIndex &index);
 
-    void on_pushButton_9_clicked();
 
-    void on_TYPE_DEMANDE_activated(const QString &arg1);
+    void on_pushButton_28_clicked();
+
+    void on_pushButton_33_clicked();
+
+    void on_pushButton_36_clicked();
+
+
+    void on_pushButton_29_clicked();
+
+
+    void on_pushButton_3_clicked();
+
+
+    void on_pushButton_30_clicked();
+
+
+
+    void on_tableView_2_activated(const QModelIndex &index);
+
+    void on_pushButton_37_clicked();
+
+
+    void on_pushButton_2_clicked();
+
+    void on_pushButton_32_clicked();
+
+    void on_pushButton_34_clicked();
+
+    void on_pushButton_39_clicked();
+
+    void on_comboBox_2_activated(const QString &arg1);
+
+
+    void on_customPlot_customContextMenuRequested(const QPoint &pos);
 
 private:
     Ui::MainWindow *ui;
@@ -80,8 +114,11 @@ private:
     dialogMateriaux *d;
     DialogEvenement *d2;
     Statistique *statistique ;
-    DialogHeberg *HebergPage;
-    SecDialog *secP;
+    materiaux tmpM ;
+    evenement tmpE ;
+    //statevenement *secPage;
+
+
 
 
 };

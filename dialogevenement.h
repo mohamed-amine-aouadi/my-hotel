@@ -18,26 +18,9 @@ public:
     ~DialogEvenement();
 
 private slots:
-    void on_pushButton_21_clicked();
-
-    void on_pushButton_3_clicked();
-
-    void on_pushButton_29_clicked();
-
-    void on_pushButton_30_clicked();
-
-    void on_pushButton_36_clicked();
-
-    void on_pushButton_33_clicked();
-
-    void on_tableView_2_activated(const QModelIndex &index);
-
-    void on_pushButton_37_clicked();
 
 private:
     Ui::DialogEvenement *ui;
-    evenement tmpE ;
-    statevenement *secPage;
 
 
 };

@@ -16,13 +16,11 @@ PERSONNEL::PERSONNEL(int cin,QString grade,int presence,int salaire,QString date
     this->salaire=salaire;
     this->date=date;
 }
-
 int PERSONNEL::get_cin(){return cin;}
 QString PERSONNEL::get_grade(){return grade;}
 int PERSONNEL::get_presence(){return presence;}
 int PERSONNEL::get_salaire(){return salaire;}
 QString PERSONNEL::get_date(){return date;}
-
 bool PERSONNEL::ajouter()
 {
     QSqlQuery query;

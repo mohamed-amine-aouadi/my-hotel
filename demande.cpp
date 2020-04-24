@@ -10,12 +10,12 @@ demande::demande()
     ETAT=0;
 }
 
-demande::demande(int QUANTITE_DEMANDE,QString TYPE_DEMANDE,int CIN,int ETAT,QString DATEDEBUT)
+demande::demande(int QUANTITE_DEMANDE,int REF_DEMANDE,QString TYPE_DEMANDE,int CIN,int ETAT,QString DATEDEBUT)
 {
    this->CIN=CIN;
     this->ETAT=ETAT;
     this->DATEDEBUT=DATEDEBUT;
-    //this->REF_DEMANDE=REF_DEMANDE;
+    this->REF_DEMANDE=REF_DEMANDE;
     this->TYPE_DEMANDE=TYPE_DEMANDE;
     this->QUANTITE_DEMANDE=QUANTITE_DEMANDE;
 }
@@ -30,8 +30,9 @@ bool demande::ajouter_demande()
 {
     QSqlQuery query;
     QString res=QString::number(CIN);
-    query.prepare("INSERT INTO DEMANDE (QUANTITE_DEMANDE, TYPE_DEMANDE, CIN, ETAT, DATEDEBUT) VALUES (:QUANTITE_DEMANDE, :TYPE_DEMANDE, :CIN, :ETAT, :DATEDEBUT)");
+    query.prepare("INSERT INTO DEMANDE (REF_DEMANDE, QUANTITE_DEMANDE, TYPE_DEMANDE, CIN, ETAT, DATEDEBUT) VALUES (:REF_DEMANDE, :QUANTITE_DEMANDE, :TYPE_DEMANDE, :CIN, :ETAT, :DATEDEBUT)");
     query.bindValue(":QUANTITE_DEMANDE",QUANTITE_DEMANDE);
+    query.bindValue(":REF_DEMANDE",REF_DEMANDE);
     query.bindValue(":TYPE_DEMANDE",TYPE_DEMANDE);
     query.bindValue(":CIN",res);
     query.bindValue(":ETAT",ETAT);
@@ -51,11 +52,11 @@ QSqlQueryModel * demande::afficher_demande()
     return model;
 
 }
-bool demande::supprimer_demande(int REF)
+bool demande::supprimer_demande(int cin)
 {
     QSqlQuery query;
-    QString res= QString::number(REF);
-    query.prepare("delete from demande where REF_DEMANDE = :REF");
-    query.bindValue(":REF",res);
+    QString res= QString::number(cin);
+    query.prepare("delete from demande where CIN = :cin");
+    query.bindValue(":cin",res);
     return query.exec();
 }
