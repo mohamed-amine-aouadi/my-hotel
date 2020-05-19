@@ -54,3 +54,24 @@ sam. avr. 18 16:27:29 2020 L'ajout dans la base de donnees equipement a ete effe
 sam. avr. 18 16:27:51 2020 La modification dans la base de donnees equipement a ete effectuee avec succees
 sam. avr. 18 16:48:14 2020 L'suppresion dans la base de donnees equipement a ete effectuee avec succees
 mer. avr. 22 12:26:45 2020 La modification dans la base de donnees animation a ete effectuee avec succees
+lun. mai 11 23:02:39 2020 L'ajout dans la base de donnees equipement a ete effectuee avec succees
+lun. mai 11 23:07:19 2020 L'ajout dans la base de donnees animation de LIEU:partie golf  a ete effectuee avec succees
+lun. mai 11 23:10:47 2020 L'ajout dans la base de donnees animation de LIEU:aaaa  a ete effectuee avec succees
+lun. mai 11 23:11:07 2020 L'suppresion dans la base de donnees animation ID:21 a ete effectuee avec succees
+lun. mai 11 23:11:30 2020 La modification dans la base de donnees animation de LIEU:parking a ete effectuee avec succees
+lun. mai 11 23:15:37 2020 L'suppresion dans la base de donnees equipement ID:1 a ete effectuee avec succees
+lun. mai 11 23:15:45 2020 L'suppresion dans la base de donnees equipement ID:1919 a ete effectuee avec succees
+lun. mai 11 23:15:59 2020 L'ajout dans la base de donnees equipement :aaaa  a ete effectuee avec succees
+lun. mai 11 23:16:15 2020 L'suppresion dans la base de donnees equipement ID:450 a ete effectuee avec succees
+lun. mai 11 23:20:57 2020 L'suppresion dans la base de donnees equipement ID:0 a ete effectuee avec succees
+lun. mai 11 23:23:53 2020 L'ajout dans la base de donnees animation de LIEU:reception  a ete effectuee avec succees
+mar. mai 12 21:16:55 2020 L'suppresion dans la base de donnees animation ID:22 a ete effectuee avec succees
+mar. mai 12 21:17:00 2020 L'suppresion dans la base de donnees animation ID:22 a ete effectuee avec succees
+mar. mai 12 21:17:05 2020 L'suppresion dans la base de donnees animation ID:23 a ete effectuee avec succees
+mar. mai 12 21:17:18 2020 L'suppresion dans la base de donnees equipement ID:21 a ete effectuee avec succees
+mar. mai 12 21:17:26 2020 L'suppresion dans la base de donnees equipement ID:22 a ete effectuee avec succees
+mer. mai 13 18:16:40 2020 L'suppresion dans la base de donnees animation ID:1 a ete effectuee avec succees
+lun. mai 18 22:57:27 2020 L'ajout dans la base de donnees animation de LIEU:iiiiii  a ete effectuee avec succees
+lun. mai 18 22:58:12 2020 L'ajout dans la base de donnees animation de LIEU:iiiiii  a ete effectuee avec succees
+lun. mai 18 22:58:38 2020 L'ajout dans la base de donnees animation de LIEU:iiiiii  a ete effectuee avec succees
+lun. mai 18 22:59:26 2020 La modification dans la base de donnees equipement :yyyyyyyy a ete effectuee avec succees

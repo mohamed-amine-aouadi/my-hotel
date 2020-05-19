@@ -40,8 +40,8 @@ bool Animation::ajouter()
 {
 QSqlQuery query;
 QString res= QString::number(idanim);
-query.prepare("INSERT INTO animation (IDANIM, TYPEANIM, LIEU, DATEANIM, DUREE, CIN) "
-                    "VALUES (:idanim, :typeanim, :lieu, :dateanim, :duree, :cin)");
+query.prepare("INSERT INTO animation (TYPEANIM, LIEU, DATEANIM, DUREE, CIN) "
+                    "VALUES (:typeanim, :lieu, :dateanim, :duree, :cin)");
 query.bindValue(":idanim", res);
 query.bindValue(":typeanim", typeanim);
 query.bindValue(":lieu", lieu);

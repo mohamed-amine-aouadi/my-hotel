@@ -41,8 +41,8 @@ bool Equipement::ajout()
 {
 QSqlQuery query;
 QString res= QString::number(id);
-query.prepare("INSERT INTO equipement (ID, TYPE, NB, IDANIMATION) "
-                    "VALUES (:id, :type, :nb, :idanimation)");
+query.prepare("INSERT INTO equipement (TYPE, NB, IDANIMATION) "
+                    "VALUES (:type, :nb, :idanimation)");
 query.bindValue(":id", res);
 query.bindValue(":type", type);
 query.bindValue(":nb", nb);

@@ -11,7 +11,7 @@
 #include <QTextStream>
 #include"QDate"
 #include <iostream>
-#include "statistique.h"
+//#include "statistique.h"
 #include "pdf.h"
 #include"QSqlRecord"
 #include"QSqlQuery"
