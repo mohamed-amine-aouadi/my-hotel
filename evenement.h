@@ -9,8 +9,7 @@ class evenement
 {
 public:
     evenement();
-    evenement (int , QString, QString,int );
-    int get_id();
+    evenement (QString, QString,int );
     QString get_type();
     QString get_date();
     int get_nbrE();

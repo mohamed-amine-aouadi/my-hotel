@@ -21,7 +21,7 @@ public:
     void makePolt();
 
 private slots:
-  //  void on_deconecterr_clicked();
+    void on_deconecterr_clicked();
 
 private:
     Ui::statistiq *ui;

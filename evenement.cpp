@@ -10,14 +10,13 @@ evenement::evenement()
  date="";
  nbrE=0;
  }
-evenement::evenement(int id ,QString type ,QString date ,int nbrE)
+evenement::evenement(/*int id ,*/QString type ,QString date ,int nbrE)
 {
-    this->id=id;
     this->type=type;
     this->date=date;
     this->nbrE=nbrE;
 }
-int evenement::get_id(){return id;}
+//int evenement::get_id(){return id;}
 QString evenement::get_type(){return type;}
 QString evenement::get_date(){return date;}
 int evenement::get_nbrE(){return nbrE;}
@@ -25,15 +24,16 @@ int evenement::get_nbrE(){return nbrE;}
 bool evenement::ajoutE()
 {
     QSqlQuery query;
-    QString res=QString::number(id);
+  //  QString res=QString::number(id);
     QString res1=QString::number(nbrE);
-    query.prepare("INSERT INTO EVENEMENT(IDEVE , TYPEEVE ,DATEEVE ,NBEVE) VALUES (:id , :type , :date ,:nbrE) ");
-    query.bindValue(":id" ,id);
+    query.prepare("INSERT INTO EVENEMENT( TYPEEVE ,DATEEVE ,NBEVE) VALUES ( :type , :date ,:nbrE) ");
+   // query.bindValue(":id" ,id);
     query.bindValue(":type" ,type);
     query.bindValue(":date" ,date);
     query.bindValue(":nbrE" ,nbrE);
     return query.exec();
 }
+
 QSqlQueryModel * evenement::afficherE()
 {
     QSqlQueryModel * model= new QSqlQueryModel();

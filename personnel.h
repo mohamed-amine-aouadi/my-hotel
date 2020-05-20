@@ -15,10 +15,15 @@ public:
     int get_salaire();
     QString get_date();
     bool ajouter();
+    bool modifier(int,QString,int,int,QString);
     QSqlQueryModel * afficher();
     bool supprimer (int);
-
-
+    QSqlQuery selectionner(QString);
+    QSqlQuery recherche (QString,QString);
+    QSqlQuery tri_presence();
+    QSqlQuery tri_cin();
+    int Salaire(int cin);
+    bool updateSalaire(int Salaire,int cin);
 private:
     QString grade,date;
     int presence,salaire;

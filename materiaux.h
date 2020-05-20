@@ -9,8 +9,8 @@ class materiaux
 {
 public:
     materiaux();
-    materiaux(QString,int,QString);
-    QString get_ref();
+    materiaux(int,QString,int);
+    int get_eve();
     int get_nbr();
     QString get_etat();
     bool ajout();
@@ -23,7 +23,7 @@ public:
 
 private:
     QString ref,etat;
-    int nbr;
+    int nbr,eve;
 };
 
 #endif // MATERIAUX_H

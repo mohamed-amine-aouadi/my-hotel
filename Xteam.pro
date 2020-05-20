@@ -1,4 +1,4 @@
-QT       += core gui
+QT       += core gui multimedia multimediawidgets
 QT        +=sql
 QT += printsupport
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
@@ -17,51 +17,65 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    affichage.cpp \
-    affichagepersonnel.cpp \
+    animation.cpp \
+    chambre.cpp \
     connexion.cpp \
     demande.cpp \
-    dialogevenement.cpp \
-    dialogmateriaux.cpp \
+    equipement.cpp \
     evenement.cpp \
     hebergement.cpp \
+    historique.cpp \
     login.cpp \
     main.cpp \
     mainwindow.cpp \
+    mainwindowvideo.cpp \
     materiaux.cpp \
+    notification.cpp \
+    pdf.cpp \
     personnel.cpp \
     qcustomplot.cpp \
+    statchambre.cpp \
     statevenement.cpp \
-    statistique.cpp
+    statistiq.cpp
 
 HEADERS += \
-    affichage.h \
-    affichagepersonnel.h \
+    animation.h \
+    chambre.h \
     connexion.h \
     demande.h \
-    dialogevenement.h \
-    dialogmateriaux.h \
     evenement.h \
     hebergement.h \
     login.h \
     mainwindow.h \
+    mainwindowvideo.h \
     materiaux.h \
+    notification.h \
+    pdf.h \
     personnel.h \
     qcustomplot.h \
+    statchambre.h \
     statevenement.h \
-    statistique.h
+    statistiq.h
 
 FORMS += \
-    affichage.ui \
-    affichagepersonnel.ui \
-    dialogevenement.ui \
-    dialogmateriaux.ui \
     login.ui \
     mainwindow.ui \
+    mainwindowvideo.ui \
+    pdf.ui \
+    statchambre.ui \
     statevenement.ui \
-    statistique.ui
+    statistiq.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+RESOURCES += \
+    Resources.qrc \
+    traduction.qrc
+
+DISTFILES += \
+    historique.txt
+
+RC_ICONS = myappico.ico

@@ -5,30 +5,36 @@
 
 materiaux::materiaux()
 {
- ref="";
+
  nbr=0;
  etat="";
+ eve=0;
 }
-materiaux::materiaux(QString ref,int nbr ,QString etat)
+materiaux::materiaux(int nbr ,QString etat, int eve)
 {
-    this->ref=ref;
+
     this->nbr=nbr;
     this->etat=etat;
+    this->eve=eve;
 }
-QString materiaux::get_ref(){return ref;}
+//QString materiaux::get_ref(){return ref;}
 int materiaux::get_nbr(){return nbr;}
 QString materiaux::get_etat(){return etat;}
+int materiaux::get_eve(){return eve;}
+
 bool materiaux::ajout()
 {
    QSqlQuery query;
    QString res=QString::number(nbr);
-   query.prepare("INSERT INTO MATERIEL(REF_MAT , NBR_MAT ,ETAT_MAT ) VALUES (:ref , :nbr , :etat ) ");
-   query.bindValue(":ref" ,ref);
+   query.prepare("INSERT INTO MATERIEL( NBR_MAT ,ETAT_MAT ,EVENEMENT ) VALUES ( :nbr , :etat , :eve ) ");
+  // query.bindValue(":ref" ,ref);
    query.bindValue(":nbr" ,res);
    query.bindValue(":etat" ,etat);
+   query.bindValue(":eve" ,eve);
 
 return query.exec();
 }
+
 QSqlQueryModel * materiaux::afficher()
 {
     QSqlQueryModel * model= new QSqlQueryModel();

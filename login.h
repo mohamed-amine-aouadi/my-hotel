@@ -15,10 +15,11 @@ class login : public QDialog
 public:
     explicit login(QWidget *parent = nullptr);
     ~login();
+int verif_login();
 
 private slots:
-    void on_pushButton_clicked();
-
+void on_pushButton_clicked();
+ void on_check_mdp_toggled(bool checked);
 private:
     Ui::login *ui;
     MainWindow *M;

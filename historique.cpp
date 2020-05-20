@@ -10,7 +10,7 @@
 
 historique::historique()
 {
-mFilename="F:/projet Qt xteam integration/projetv0/historique.txt";
+mFilename="C:/Users/User/Desktop/1.1/2/projet C++/projet/historique.txt";
 }
 QString historique::read()
 {

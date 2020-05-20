@@ -36,7 +36,10 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
     void makePolt();
- void makePolt1();
+    void makePolt1();
+    void makePolt2();
+    void makePlot_2();
+    QMenu *criarMenu();
 private slots:
 
 
@@ -64,25 +67,25 @@ private slots:
 
     void on_pushButton_15_clicked();
 
-    void on_pushButton_18_clicked();
+    //void on_pushButton_18_clicked();
 
     void on_pushButton_16_clicked();
 
     void on_pushButton_19_clicked();
 
-    void on_pushButton_21_clicked();
+    //void on_pushButton_21_clicked();
 
-    void on_pushButton_clicked();
+    //void on_pushButton_clicked();
 
     void on_pushButton_5_clicked();
 
     void on_pushButton_6_clicked();
 
-    void on_pushButton_8_clicked();
+    //void on_pushButton_8_clicked();
 
     void on_pushButton_9_clicked();
 
-    void on_TYPE_DEMANDE_activated(const QString &arg1);
+    //void on_TYPE_DEMANDE_activated(const QString &arg1);
 
     void on_pushButton_33_clicked();
 
@@ -125,10 +128,10 @@ private slots:
     void on_pushButton_34_clicked();
 
 
-    void on_comboBox_3_activated(const QString &arg1);
+    //void on_comboBox_3_activated(const QString &arg1);
 
 void on_tabhebergement_activated(const QModelIndex &index);
-void on_tableView_activated(const QModelIndex &index);
+//void on_tableView_activated(const QModelIndex &index);
 void on_tablefiras_activated(const QModelIndex &index);
 
     void on_pushButton_41_clicked();
@@ -159,7 +162,7 @@ void on_tablefiras_activated(const QModelIndex &index);
 
     void on_video_clicked();
 
-    void on_pushButton_44_clicked();
+   // void on_pushButton_44_clicked();
 
     void on_pushButton_47_clicked();
 
@@ -234,6 +237,12 @@ void on_Rechercher_3_clicked();
  void on_tabequipement_activated(const QModelIndex &index);
 
  void on_statistique_clicked();
+
+ void on_actualiser_amine_clicked();
+
+ void on_excel1_clicked();
+
+ void on_excel2_clicked();
 
 private:
     Ui::MainWindow *ui;

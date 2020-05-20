@@ -19,14 +19,23 @@
 #include"QSqlRecord"
 #include"QSqlQuery"
 #include "statchambre.h"
+#include "notification.h"
+#include "mainwindow.h"
 //#include "statyoussef.h"
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    trayIcon = new QSystemTrayIcon(QIcon(QPixmap("C:/Users/User/Desktop/1.1/2/projet C++/projet/myappico.ico")),this);
+    trayIcon->setContextMenu(criarMenu());
+    trayIcon->show();
+    trayIcon->showMessage("Bienvenu", "My Hotel Loisirs",
+                          QSystemTrayIcon::Information, 3000);
     makePolt();
     makePolt1();
+    makePolt2();
+
     ui->tabanim->setModel(tmpanim.afficher());
     ui->tabanime->setModel(tmpanime.afficherasc());
     ui->pushButton_4->setToolTip("Quitter");
@@ -48,7 +57,10 @@ ui->tabWidget_5->setTabText(1,"Evenements");
 ui->tabWidget_6->setTabText(0,"Animation");
 ui->tabWidget_6->setTabText(1,"Equipe");
 
-
+ui->lineEdit_cin->setPlaceholderText("CIN");
+ui->lineEdit_id->setPlaceholderText("IDEQUIPEMENT");
+ui->lineEdit_type->setPlaceholderText("TYPEEQUIPEMENT");
+ui->lineEdit_nb->setPlaceholderText("NOMBRE");
 
 ui->Num->setPlaceholderText("Numero de chambre");
 
@@ -59,10 +71,10 @@ ui->cin->setPlaceholderText("CIN");
 ui->salaire->setPlaceholderText("Salaire");
 
 ui->QUANTITE_DEMANDE->setPlaceholderText("Quantite Demande");
-ui->Ref->setPlaceholderText("Reference");
+//ui->Ref->setPlaceholderText("Reference");
 ui->QNT->setPlaceholderText("Quantité");
 ui->etatM->setPlaceholderText("Etat");
-ui->NomEVE->setPlaceholderText("id ");
+//ui->NomEVE->setPlaceholderText("id ");
 ui->TypeEVE->setPlaceholderText("Type");
 ui->NBpEVE->setPlaceholderText("Nombre de personnes");
 /*ui->IdANIM->setPlaceholderText("ID");
@@ -150,7 +162,15 @@ void MainWindow::on_pushButton_27_clicked()
 {
     QApplication::quit();
 }
-
+QMenu *MainWindow::criarMenu()
+{
+  auto menu = new QMenu("Menu de icone", this);
+  menu->addAction("youssef selmi", [this] {show();});
+  menu->addAction("youssef selmi", [this] {hide();});
+  menu->addSeparator();
+  //menu->addAction("sai", [this] {qApp->quit();});
+  return  menu;
+}
 void MainWindow::on_pushButton_10_clicked()
 {
     int CIN = ui->cin->text().toInt();
@@ -177,13 +197,13 @@ void MainWindow::on_pushButton_10_clicked()
         QMessageBox::information(nullptr, QObject::tr("database is open"),
                               QObject::tr("personnel ajouter.\n"
                                 "Click Cancel to exit."), QMessageBox::Cancel);
-        QSqlQueryModel * modal= new QSqlQueryModel();
-        QSqlQuery request;
-        request.prepare("select CIN from PERSONNEL");
-        request.exec();
-        modal->setQuery(request);
-        ui->comboBox_3->setModel(modal);
+
     }
+    else
+     {  qDebug()<<"test";
+        notification n("ERREUR","Personnel existe déja");
+        n.afficher();
+        }
     }
     }
     else {
@@ -232,10 +252,11 @@ void MainWindow::on_pushButton_13_clicked()
 
 void MainWindow::on_pushButton_16_clicked()
 {
-    QString ref=ui->Ref->text();
+
     int nbr = ui->QNT->text().toInt();
     QString etat = ui->etatM->text();
-    materiaux M(ref,nbr,etat);
+    int eve=ui->Ref_Eve->currentText().toInt();
+        materiaux M(nbr,etat,eve);
     bool test=M.ajout();
     if (test)
     {
@@ -243,21 +264,34 @@ void MainWindow::on_pushButton_16_clicked()
                             QObject::tr("materiel ajouteé.\n"
                                         "Click Cancel to exit."), QMessageBox::Cancel);
     }
+    else
+    {
+        QMessageBox::information(nullptr, QObject::tr("database is open"),
+                    QObject::tr("Erreur.\n"
+                                "Click Cancel to exit."), QMessageBox::Cancel);
+    }
+
 }
 
 void MainWindow::on_pushButton_19_clicked()
 {
-    int id = ui->NomEVE->text().toInt();
+
     QString type = ui->TypeEVE->text();
     QString date =ui->calendarWidget_5->selectedDate().toString();
     int nbrE = ui->NBpEVE->text().toInt();
-    evenement E(id,type,date,nbrE);
+       evenement E(/*id,*/type,date,nbrE);
     bool test = E.ajoutE();
     if (test)
     {
                 QMessageBox::information(nullptr, QObject::tr("database is open"),
                             QObject::tr("evenement ajouteé.\n"
                                         "Click Cancel to exit."), QMessageBox::Cancel);
+    }
+    else
+    {
+        QMessageBox::information(nullptr, QObject::tr("database is open"),
+                    QObject::tr("Erreur.\n"
+                                "Click Cancel to exit."), QMessageBox::Cancel);
     }
 
 }
@@ -267,59 +301,55 @@ void MainWindow::on_pushButton_19_clicked()
 void MainWindow::on_pushButton_5_clicked()
 {
     QSqlQuery RP,up;
-    int num=0;
-    int cin=ui->CIIN_2->text().toInt();
-            int nbP=ui->NBpersonnes_2->text().toInt();
-            QString TypeC=ui->TypeC->currentText();
-            QString TypeP=ui->TypeP_2->currentText();
-            QString CinCheck=ui->CIIN_2->text();
-
-
-            QString Nom=ui->Nom->text();
-            QString Prenom=ui->Prenom->text();
-            RP.prepare("select NUM_CHAMBRE from(select NUM_CHAMBRE from  chambre where ETAT_CHAMBRE='Non reserver ' AND TYPE_CHAMBRE=:type) where rownum <2;" );
-            RP.bindValue(":type",TypeC);
-            if(RP.exec()){
-                while (RP.next()){
-                    num=RP.value(0).toInt();
-                }
-                if (!Nom.isEmpty()&&!Prenom.isEmpty()&&(nbP/1)!=0 && ((cin/1)!=0) && (CinCheck.size()==8)){
-                   if (num!=0){
-                       if (ui->dateTimeEdit->date() < ui->dateTimeEdit_2->date()){
-                   QString dateA=ui->dateTimeEdit->date().toString();
-                   QString dateD=ui->dateTimeEdit_2->date().toString();
-            hebergement H(num,cin,nbP,dateA,dateD,TypeC,TypeP,Nom,Prenom);
-            bool test=H.ajouterH();
-            up.prepare("UPDATE CHAMBRE SET ETAT_CHAMBRE='Reserver' where NUM_CHAMBRE=:num");
-            up.bindValue(":num",num);
-            up.exec();
-            if (test)
-            {
-
-                QMessageBox::information(nullptr, QObject::tr("database is open"),
-                                      QObject::tr("Reservation ajouter.\n"
-                                        "Click Cancel to exit."), QMessageBox::Cancel);
-
-            }
-                   }
-                       else {
-                           QMessageBox::critical(nullptr, QObject::tr("Erreur"),
-                                                 QObject::tr("Date de depart doit etre superieure a celle d'arrive.\n"
-                                                   ), QMessageBox::Cancel);
-                       }
-                                }
-                   else {
-                       QMessageBox::critical(nullptr, QObject::tr("Erreur"),
-                                             QObject::tr("Aucune chambre disponible.\n"
-                                               ), QMessageBox::Cancel);
-                   }
-                }
-                else {
-                    QMessageBox::critical(nullptr, QObject::tr("Erreur"),
-                                          QObject::tr("Tous les champs sont obligatoires.\n"
-                                            ), QMessageBox::Cancel);
-                }
-            }
+      int num=0;
+      int cin=ui->CIIN_2->text().toInt();
+              int nbP=ui->NBpersonnes_2->text().toInt();
+              QString TypeC=ui->TypeC->currentText();
+              QString TypeP=ui->TypeP_2->currentText();
+              QString CinCheck=ui->CIIN_2->text();
+              QString Nom=ui->Nom->text();
+              QString Prenom=ui->Prenom->text();
+              RP.prepare("select NUM_CHAMBRE from(select NUM_CHAMBRE from  chambre where ETAT_CHAMBRE='Non reserver ' AND TYPE_CHAMBRE=:type) where rownum <2;" );
+              RP.bindValue(":type",TypeC);
+              if(RP.exec()){
+                  while (RP.next()){
+                      num=RP.value(0).toInt();
+                  }
+                  if (!Nom.isEmpty()&&!Prenom.isEmpty()&&(nbP/1)!=0 && ((cin/1)!=0) && (CinCheck.size()==8)){
+                     if (num!=0){
+                         if (ui->dateTimeEdit->date() < ui->dateTimeEdit_2->date()){
+                     QString dateA=ui->dateTimeEdit->date().toString();
+                     QString dateD=ui->dateTimeEdit_2->date().toString();
+              hebergement H(num,cin,nbP,dateA,dateD,TypeC,TypeP,Nom,Prenom);
+              bool test=H.ajouterH();
+              up.prepare("UPDATE CHAMBRE SET ETAT_CHAMBRE='Reserver' where NUM_CHAMBRE=:num");
+              up.bindValue(":num",num);
+              up.exec();
+              if (test)
+              {
+                  QMessageBox::information(nullptr, QObject::tr("database is open"),
+                                        QObject::tr("Reservation ajouter.\n"
+                                          "Click Cancel to exit."), QMessageBox::Cancel);
+              }
+                     }
+                         else {
+                             QMessageBox::critical(nullptr, QObject::tr("Erreur"),
+                                                   QObject::tr("Date de depart doit etre superieure a celle d'arrive.\n"
+                                                     ), QMessageBox::Cancel);
+                         }
+                                  }
+                     else {
+                         QMessageBox::critical(nullptr, QObject::tr("Erreur"),
+                                               QObject::tr("Aucune chambre disponible.\n"
+                                                 ), QMessageBox::Cancel);
+                     }
+                  }
+                  else {
+                      QMessageBox::critical(nullptr, QObject::tr("Erreur"),
+                                            QObject::tr("Tous les champs sont obligatoires.\n"
+                                              ), QMessageBox::Cancel);
+                  }
+              }
 }
 
 
@@ -375,25 +405,21 @@ void MainWindow::on_pushButton_3_clicked()
     presence=ui->recherche_presence->text().toInt();
     salaire=ui->recherche_salaire->text().toInt();
     date=ui->recherche_date->text();
-    QSqlQuery qry;
-    qry.prepare("update PERSONNEL set GRADE=:Grade,PRESENCE=:Presence,SALAIRE=:Salaire,DATECONTRAT=:Date where CIN=:cin ");
-    qry.bindValue(":cin",cin);
-    qry.bindValue(":Grade",grade);
-    qry.bindValue(":Presence",presence);
-    qry.bindValue(":Salaire",salaire);
-    qry.bindValue(":Date",date);
-            QMessageBox::critical(nullptr, QObject::tr("database is open"),
+    PERSONNEL p;
+   if(p.modifier(cin,grade,presence,salaire,date))
+     {       QMessageBox::critical(nullptr, QObject::tr("database is open"),
                                   QObject::tr("personnel modifier.\n"
                                     "Click Cancel to exit."), QMessageBox::Cancel);
-    qry.exec();
+
     ui->tabpersonnel->setModel(tmppersonnel.afficher());//refresh
+   }
 }
 void MainWindow::on_tabpersonnel_activated(const QModelIndex &index)
 {
     QString val=ui->tabpersonnel->model()->data(index).toString();
-    QSqlQuery qry;
-    qry.prepare("select * from PERSONNEL where CIN=:val or GRADE=:val or PRESENCE=:val or SALAIRE=:val or DATECONTRAT=:val");
-    qry.bindValue(":val",val);
+     PERSONNEL p;
+    QSqlQuery qry=p.selectionner(val);
+
     if (qry.exec())
     {
         while (qry.next())
@@ -406,7 +432,6 @@ void MainWindow::on_tabpersonnel_activated(const QModelIndex &index)
 
         }
     }
-
 
 }
 
@@ -440,51 +465,43 @@ void MainWindow::on_pushButton_30_clicked()
 
 void MainWindow::on_pushButton_28_clicked()
 {
-    QString strStream;
-            QTextStream out(&strStream);
-            const int rowCount = ui->tabpersonnel->model()->rowCount();
-            const int columnCount = ui->tabpersonnel->model()->columnCount();
-            for (int column = 0; column < columnCount; column++)
-                if (!ui->tabpersonnel->isColumnHidden(column))
-                   out << QString("<th>%1</th>").arg(ui->tabpersonnel->model()->headerData(column, Qt::Horizontal).toString());
-            for (int row = 0; row < rowCount; row++) {
-                for (int column = 0; column < columnCount; column++) {
-                    if (!ui->tabpersonnel->isColumnHidden(column)) {
-                        QString data =ui->tabpersonnel->model()->data(ui->tabpersonnel->model()->index(row, column)).toString().simplified();
-                        out << QString("<td bkcolor=0>%1</td>").arg((!data.isEmpty()) ? data : QString("&nbsp;"));
-                    }
-                }
-            }
-           QTextDocument *document = new QTextDocument();
-           document->setHtml(strStream);
-           QString fileName = QFileDialog::getSaveFileName((QWidget* )0, "Export PDF", QString(), ".pdf");
-           if (QFileInfo(fileName).suffix().isEmpty()) { fileName.append(".txt.pdf"); }
-           QPrinter printer(QPrinter::PrinterResolution);
-           printer.setOutputFormat(QPrinter::PdfFormat);
-           printer.setPaperSize(QPrinter::A4);
-           printer.setOutputFileName(fileName);
-           QTextDocument doc;
-           doc.setHtml(document->toPlainText());
-            doc.print(&printer);
+    QPixmap pix(ui->tabpersonnel->size());
+          QPainter painter(&pix);
+         ui->tabpersonnel->render(&painter);
+          painter.end();
+          QPrinter printer(QPrinter::HighResolution);
+          printer.setOrientation(QPrinter::Landscape);
+          printer.setOutputFormat(QPrinter::PdfFormat);
+          printer.setPaperSize(QPrinter::A4);
+          printer.setOutputFileName("C:/Users/User/Desktop/1.1/2/projet C++/projet/personnel.pdf"); // will be in build folder
+
+          painter.begin(&printer);
+          double xscale = printer.pageRect().width() / double(pix.width());
+          double yscale = printer.pageRect().height() / double(pix.height());
+          double scale = qMin(xscale, yscale);
+          painter.translate(printer.paperRect().x() + printer.pageRect().width() / 2,
+                            printer.paperRect().y() + printer.pageRect().height() / 2);
+          painter.scale(scale, scale);
+          painter.translate(-ui->tabpersonnel->width() / 2, -ui->tabpersonnel->height() / 2);
+          painter.drawPixmap(0, 0, pix);
+
+        QTextDocument doc;
+
+        doc.setHtml("htmlcontent");
+        doc.drawContents(&painter);
+
+          painter.end();
 }
 
 void MainWindow::on_pushButton_31_clicked()
 {
     QSqlQueryModel *modal=new QSqlQueryModel();
-            QSqlQuery request;
+
            QString type=ui->comboBox->currentText();
            QString val=ui->lineEdit->text();
            val="%"+val+"%";
-           if (type=="CIN"){
-               request.prepare("SELECT * FROM PERSONNEL WHERE CIN LIKE:val order by CIN");
-           }else if (type=="GRADE"){
-               request.prepare("SELECT * FROM PERSONNEL WHERE GRADE LIKE:val");
-           }else if (type=="SALAIRE"){
-               request.prepare("SELECT * FROM PERSONNEL WHERE SALAIRE LIKE:val");
-           }else if (type=="DATE CONTRAT"){
-               request.prepare("SELECT * FROM PERSONNEL WHERE DATECONTRAT LIKE:val");
-           }
-           request.bindValue(":val",val);
+           PERSONNEL p;
+           QSqlQuery request=p.recherche(type,val);
            request.exec();
            modal->setQuery(request);
            ui->tabpersonnel->setModel(modal);
@@ -493,8 +510,8 @@ void MainWindow::on_pushButton_31_clicked()
 void MainWindow::on_pushButton_29_clicked()
 {
     QSqlQueryModel * modal= new QSqlQueryModel();
-    QSqlQuery request;
-        request.prepare("select * from PERSONNEL order by PRESENCE DESC");
+    PERSONNEL p;
+    QSqlQuery request=p.tri_presence();
         request.exec();
         modal->setQuery(request);
         ui->tabpersonnel->setModel(modal);
@@ -503,8 +520,8 @@ void MainWindow::on_pushButton_29_clicked()
 void MainWindow::on_pushButton_32_clicked()
 {
     QSqlQueryModel * modal= new QSqlQueryModel();
-    QSqlQuery request;
-        request.prepare("select * from PERSONNEL order by CIN DESC");
+    PERSONNEL p;
+    QSqlQuery request=p.tri_cin();
         request.exec();
         modal->setQuery(request);
         ui->tabpersonnel->setModel(modal);
@@ -520,9 +537,8 @@ void MainWindow::on_pushButton_36_clicked()
 void MainWindow::on_tabdemande_activated(const QModelIndex &index)
 {
     QString val=ui->tabdemande->model()->data(index).toString();
-    QSqlQuery qry;
-    qry.prepare("select * from demande where REF_DEMANDE=:val ");
-    qry.bindValue(":val",val);
+    demande d;
+    QSqlQuery qry=d.selectionner(val);
     if (qry.exec())
     {
         while (qry.next())
@@ -559,18 +575,14 @@ void MainWindow::on_modifier_demande_clicked()
     etat=ui->etat->text().toInt();
     quantite=ui->quantite->text().toInt();
     date=ui->date_2->text();
-    QSqlQuery qry;
-    qry.prepare("update demande set QUANTITE_DEMANDE=:Quantite,TYPE_DEMANDE=:Type,ETAT=:Etat,DATEDEBUT=:Date where REF_DEMANDE=:ref ");
-    qry.bindValue(":cin",cin);
-     qry.bindValue(":ref",ref);
-    qry.bindValue(":Quantite",quantite);
-    qry.bindValue(":Type",type);
-    qry.bindValue(":Etat",etat);
-    qry.bindValue(":Date",date);
-            QMessageBox::critical(nullptr, QObject::tr("database is open"),
+    demande d;
+    if(d.modifier(cin,ref,quantite,type,etat,date))
+
+    {    QMessageBox::critical(nullptr, QObject::tr("database is open"),
                                   QObject::tr("demande modifier.\n"
                                     "Click Cancel to exit."), QMessageBox::Cancel);
-    qry.exec();
+   }
+
     ui->tabdemande->setModel(tmpdemande.afficher_demande());//refresh
 }
 
@@ -605,51 +617,43 @@ void MainWindow::on_pushButton_38_clicked()
 
 void MainWindow::on_pushButton_35_clicked()
 {
-    QString strStream;
-            QTextStream out(&strStream);
-            const int rowCount = ui->tabdemande->model()->rowCount();
-            const int columnCount = ui->tabdemande->model()->columnCount();
-            for (int column = 0; column < columnCount; column++)
-                if (!ui->tabdemande->isColumnHidden(column))
-                   out << QString("<th>%1</th>").arg(ui->tabdemande->model()->headerData(column, Qt::Horizontal).toString());
-            for (int row = 0; row < rowCount; row++) {
-                for (int column = 0; column < columnCount; column++) {
-                    if (!ui->tabdemande->isColumnHidden(column)) {
-                        QString data =ui->tabdemande->model()->data(ui->tabdemande->model()->index(row, column)).toString().simplified();
-                        out << QString("<td bkcolor=0>%1</td>").arg((!data.isEmpty()) ? data : QString("&nbsp;"));
-                    }
-                }
-            }
-           QTextDocument *document = new QTextDocument();
-           document->setHtml(strStream);
-           QString fileName = QFileDialog::getSaveFileName((QWidget* )0, "Export PDF", QString(), ".pdf");
-           if (QFileInfo(fileName).suffix().isEmpty()) { fileName.append(".txt.pdf"); }
-           QPrinter printer(QPrinter::PrinterResolution);
-           printer.setOutputFormat(QPrinter::PdfFormat);
-           printer.setPaperSize(QPrinter::A4);
-           printer.setOutputFileName(fileName);
-           QTextDocument doc;
-           doc.setHtml(document->toPlainText());
-            doc.print(&printer);
+    QPixmap pix(ui->tabdemande->size());
+          QPainter painter(&pix);
+         ui->tabdemande->render(&painter);
+          painter.end();
+          QPrinter printer(QPrinter::HighResolution);
+          printer.setOrientation(QPrinter::Landscape);
+          printer.setOutputFormat(QPrinter::PdfFormat);
+          printer.setPaperSize(QPrinter::A4);
+          printer.setOutputFileName("C:/Users/User/Desktop/1.1/2/projet C++/projet/demande.pdf"); // will be in build folder
+
+          painter.begin(&printer);
+          double xscale = printer.pageRect().width() / double(pix.width());
+          double yscale = printer.pageRect().height() / double(pix.height());
+          double scale = qMin(xscale, yscale);
+          painter.translate(printer.paperRect().x() + printer.pageRect().width() / 2,
+                            printer.paperRect().y() + printer.pageRect().height() / 2);
+          painter.scale(scale, scale);
+          painter.translate(-ui->tabdemande->width() / 2, -ui->tabdemande->height() / 2);
+          painter.drawPixmap(0, 0, pix);
+
+        QTextDocument doc;
+
+        doc.setHtml("htmlcontent");
+        doc.drawContents(&painter);
+
+          painter.end();
 }
 
 void MainWindow::on_recherche_demande_clicked()
 {
     QSqlQueryModel *modal=new QSqlQueryModel();
-            QSqlQuery request;
+
            QString type=ui->comboBox_212->currentText();
            QString val=ui->lineEdit_recherche->text();
            val="%"+val+"%";
-           if (type=="TYPE"){
-               request.prepare("SELECT * FROM demande WHERE TYPE_DEMANDE LIKE:val ");
-           }else if (type=="ETAT"){
-               request.prepare("SELECT * FROM demande WHERE ETAT LIKE:val");
-           }else if (type=="CIN"){
-               request.prepare("SELECT * FROM demande WHERE CIN LIKE:val");
-           }else if (type=="DATE"){
-               request.prepare("SELECT * FROM demande WHERE DATEDEBUT LIKE:val");
-           }
-           request.bindValue(":val",val);
+           demande d;
+           QSqlQuery request=d.recherche(type,val);
            request.exec();
            modal->setQuery(request);
            ui->tabdemande->setModel(modal);
@@ -658,53 +662,61 @@ void MainWindow::on_recherche_demande_clicked()
 void MainWindow::on_pushButton_40_clicked()
 {
     int cin,ref,quantite,etat;
-    QString type,date,log,mdp;
-    cin=ui->cin->text().toInt();
-    type=ui->type->text();
-    ref=ui->ref->text().toInt();
-    etat=ui->etat->text().toInt();
-    quantite=ui->quantite->text().toInt();
-    date=ui->date_2->text();
-    log=ui->log->text();
-    mdp=ui->mdp->text();
-    QSqlQuery qry;
-    QSqlQuery update;
-    if (log=="admin" && mdp=="admin")
-    {
-    if (type=="Augmentation de salaire")
-      {
-        update.prepare("update PERSONNEL set SALAIRE=SALAIRE+:Quantite where CIN=:cin ");
-      update.prepare("update DEMANDE set ETAT=1 where REF_DEMANDE=:ref");
-      update.bindValue(":cin",cin);
-      update.bindValue(":ref",ref);
-      update.bindValue(":Quantite",quantite);
-      update.bindValue(":Type",type);
-     update.bindValue(":Etat",etat);
-      update.bindValue(":Date",date);
-      update.exec();
+        QString type,date,log,mdp;
+        cin=ui->cin->text().toInt();
+        type=ui->type->text();
+        ref=ui->ref->text().toInt();
+        etat=ui->etat->text().toInt();
+        quantite=ui->quantite->text().toInt();
+        date=ui->date_2->text();
+        log=ui->log->text();
+        mdp=ui->mdp->text();
+        QSqlQuery qry;
+        QSqlQuery update,update1,salaire;
+        int Salaire=0;
+        if (log=="admin" && mdp=="admin")
+        {
+        if (type=="Augmentation de salaire")
+          {
+            salaire.prepare("select SALAIRE from PERSONNEL where CIN=:cin");
+            salaire.bindValue(":cin",cin);
+            if (salaire.exec()){
+                while (salaire.next()){
+                    Salaire=salaire.value(0).toInt();
+                }
+            }
+                Salaire+=quantite;
+            update1.prepare("update PERSONNEL set SALAIRE=:Salaire where CIN=:cin");
+         update1.bindValue(":cin",cin);
+         update1.bindValue(":Salaire",Salaire);
+          update1.bindValue(":Quantite",quantite);
+         update1.exec();
+            update.prepare("update DEMANDE set ETAT=1 where REF_DEMANDE=:ref");
+          update.bindValue(":ref",ref);
+         update.bindValue(":Etat",etat);
+          update.exec();
+          }
+        else{
+            qry.prepare("update DEMANDE set ETAT=1 where REF_DEMANDE=:ref ");
+         qry.bindValue(":ref",ref);
+        qry.bindValue(":Etat",etat);
+        qry.exec();
+     }
+                QMessageBox::critical(nullptr, QObject::tr("database is open"),
+                                      QObject::tr("demande accepter.\n"
+                                        "Click Cancel to exit."), QMessageBox::Cancel);
+
+        ui->tabdemande->setModel(tmpdemande.afficher_demande());//refresh
+        }
+        else
+          {
+              QMessageBox::critical(nullptr, QObject::tr("database is open"),
+                          QObject::tr("wrong admin or password.\n"
+                                      "Click Cancel to exit."), QMessageBox::Cancel);
       }
-    else{
-        qry.prepare("update DEMANDE set ETAT=1 where REF_DEMANDE=:ref ");
-    qry.bindValue(":cin",cin);
-     qry.bindValue(":ref",ref);
-    qry.bindValue(":Quantite",quantite);
-    qry.bindValue(":Type",type);
-    qry.bindValue(":Etat",etat);
-    qry.bindValue(":Date",date);
- }
-            QMessageBox::critical(nullptr, QObject::tr("database is open"),
-                                  QObject::tr("demande accepter.\n"
-                                    "Click Cancel to exit."), QMessageBox::Cancel);
-    qry.exec();
-    ui->tabdemande->setModel(tmpdemande.afficher_demande());//refresh
     }
-    else
-      {
-          QMessageBox::critical(nullptr, QObject::tr("database is open"),
-                      QObject::tr("wrong admin or password.\n"
-                                  "Click Cancel to exit."), QMessageBox::Cancel);
-  }
-}
+
+
 
 void MainWindow::on_pushButton_37_clicked()
 {
@@ -873,39 +885,32 @@ void MainWindow::on_pushButton_15_clicked()
 
 void MainWindow::on_pdf_clicked()
 {
-    QString strStream;
-            QTextStream out(&strStream);
+    QPixmap pix(ui->tabhebergement->size());
+          QPainter painter(&pix);
+         ui->tabhebergement->render(&painter);
+          painter.end();
+          QPrinter printer(QPrinter::HighResolution);
+          printer.setOrientation(QPrinter::Landscape);
+          printer.setOutputFormat(QPrinter::PdfFormat);
+          printer.setPaperSize(QPrinter::A4);
+          printer.setOutputFileName("C:/Users/User/Desktop/1.1/2/projet C++/projet/hebergement.pdf"); // will be in build folder
 
-            const int rowCount = ui->tabhebergement->model()->rowCount();
-            const int columnCount = ui->tabhebergement->model()->columnCount();
-            for (int column = 0; column < columnCount; column++)
-                if (!ui->tabhebergement->isColumnHidden(column))
-                   out << QString("<th>%1<br></th>").arg(ui->tabhebergement->model()->headerData(column, Qt::Horizontal).toString());
+          painter.begin(&printer);
+          double xscale = printer.pageRect().width() / double(pix.width());
+          double yscale = printer.pageRect().height() / double(pix.height());
+          double scale = qMin(xscale, yscale);
+          painter.translate(printer.paperRect().x() + printer.pageRect().width() / 2,
+                            printer.paperRect().y() + printer.pageRect().height() / 2);
+          painter.scale(scale, scale);
+          painter.translate(-ui->tabhebergement->width() / 2, -ui->tabhebergement->height() / 2);
+          painter.drawPixmap(0, 0, pix);
 
-            for (int row = 0; row < rowCount; row++) {
-                out << "<tr>";
-                for (int column = 0; column < columnCount; column++) {
-                    if (!ui->tabhebergement->isColumnHidden(column)) {
-                        QString data =ui->tabhebergement->model()->data(ui->tabhebergement->model()->index(row, column)).toString().simplified();
-                        out << QString("<td bkcolor=0>%1<br></td>").arg((!data.isEmpty()) ? data : QString("&nbsp;"));
-                    }
-                }
-            }
-           QTextDocument *document=new QTextDocument();
-           document->setHtml(strStream);
+        QTextDocument doc;
 
-           QString fileName = QFileDialog::getSaveFileName((QWidget*)0, "Export PDF", QString(), ".pdf");
-           if (QFileInfo(fileName).suffix().isEmpty()) { fileName.append(".txt.pdf"); }
+        doc.setHtml("htmlcontent");
+        doc.drawContents(&painter);
 
-           QPrinter printer(QPrinter::PrinterResolution);
-           printer.setOutputFormat(QPrinter::PdfFormat);
-           printer.setPaperSize(QPrinter::A4);
-           printer.setOutputFileName(fileName);
-
-           QTextDocument doc;
-
-           doc.setHtml(document->toPlainText());
-            doc.print(&printer);
+          painter.end();
 }
 
 void MainWindow::on_pushButton_42_clicked()
@@ -1055,39 +1060,32 @@ void MainWindow::on_print_clicked()
 
 void MainWindow::on_pdf_2_clicked()
 {
-    QString strStream;
-            QTextStream out(&strStream);
+    QPixmap pix(ui->tablefiras->size());
+          QPainter painter(&pix);
+         ui->tablefiras->render(&painter);
+          painter.end();
+          QPrinter printer(QPrinter::HighResolution);
+          printer.setOrientation(QPrinter::Landscape);
+          printer.setOutputFormat(QPrinter::PdfFormat);
+          printer.setPaperSize(QPrinter::A4);
+          printer.setOutputFileName("C:/Users/User/Desktop/1.1/2/projet C++/projet/chambre.pdf"); // will be in build folder
 
-            const int rowCount = ui->tablefiras->model()->rowCount();
-            const int columnCount = ui->tablefiras->model()->columnCount();
-            for (int column = 0; column < columnCount; column++)
-                if (!ui->tablefiras->isColumnHidden(column))
-                   out << QString("<th>%1<br></th>").arg(ui->tablefiras->model()->headerData(column, Qt::Horizontal).toString());
+          painter.begin(&printer);
+          double xscale = printer.pageRect().width() / double(pix.width());
+          double yscale = printer.pageRect().height() / double(pix.height());
+          double scale = qMin(xscale, yscale);
+          painter.translate(printer.paperRect().x() + printer.pageRect().width() / 2,
+                            printer.paperRect().y() + printer.pageRect().height() / 2);
+          painter.scale(scale, scale);
+          painter.translate(-ui->tablefiras->width() / 2, -ui->tablefiras->height() / 2);
+          painter.drawPixmap(0, 0, pix);
 
-            for (int row = 0; row < rowCount; row++) {
-                out << "<tr>";
-                for (int column = 0; column < columnCount; column++) {
-                    if (!ui->tablefiras->isColumnHidden(column)) {
-                        QString data =ui->tablefiras->model()->data(ui->tablefiras->model()->index(row, column)).toString().simplified();
-                        out << QString("<td bkcolor=0>%1<br></td>").arg((!data.isEmpty()) ? data : QString("&nbsp;"));
-                    }
-                }
-            }
-           QTextDocument *document=new QTextDocument();
-           document->setHtml(strStream);
+        QTextDocument doc;
 
-           QString fileName = QFileDialog::getSaveFileName((QWidget*)0, "Export PDF", QString(), ".pdf");
-           if (QFileInfo(fileName).suffix().isEmpty()) { fileName.append(".txt.pdf"); }
+        doc.setHtml("htmlcontent");
+        doc.drawContents(&painter);
 
-           QPrinter printer(QPrinter::PrinterResolution);
-           printer.setOutputFormat(QPrinter::PdfFormat);
-           printer.setPaperSize(QPrinter::A4);
-           printer.setOutputFileName(fileName);
-
-           QTextDocument doc;
-
-           doc.setHtml(document->toPlainText());
-            doc.print(&printer);
+          painter.end();
 }
 
 void MainWindow::on_video_clicked()
@@ -1096,11 +1094,7 @@ void MainWindow::on_video_clicked()
     video->show();
 }
 
-void MainWindow::on_pushButton_44_clicked()
-{
-    statCH=new StatChambre(this);
-    statCH->show();
-}
+
 void MainWindow::on_tableView_2_activated(const QModelIndex &index)
 {
     QString  val=ui->tableView_2->model()->data(index).toString();
@@ -1128,7 +1122,8 @@ void MainWindow::on_pushButton_46_clicked()
     QString ref=ui->Ref_3->text();
     int nbr = ui->QNT_3->text().toInt();
     QString etat = ui->etatM_3->text();
-    materiaux M(ref,nbr,etat);
+    int eve =ui->Ref_Eve->currentText().toInt();
+    materiaux M(nbr,etat,eve);
     bool test=M.modif(ref,nbr);
     bool test2=M.modifEtat(ref,etat);
     if (test || test2)
@@ -1187,38 +1182,32 @@ void MainWindow::on_pushButton_48_clicked()
 
 void MainWindow::on_pushButton_51_clicked()
 {
-    QString strStream;
-        QTextStream out(&strStream);
+    QPixmap pix(ui->tableView_2->size());
+          QPainter painter(&pix);
+         ui->tableView_2->render(&painter);
+          painter.end();
+          QPrinter printer(QPrinter::HighResolution);
+          printer.setOrientation(QPrinter::Landscape);
+          printer.setOutputFormat(QPrinter::PdfFormat);
+          printer.setPaperSize(QPrinter::A4);
+          printer.setOutputFileName("C:/Users/User/Desktop/1.1/2/projet C++/projet/materiaux.pdf"); // will be in build folder
 
-        const int rowCount = ui->tableView_2->model()->rowCount();
-        const int columnCount = ui->tableView_2->model()->columnCount();
-        for (int column = 0; column < columnCount; column++)
-            if (!ui->tableView_2->isColumnHidden(column))
-               out << QString("<th>%1</th>").arg(ui->tableView_2->model()->headerData(column, Qt::Horizontal).toString());
+          painter.begin(&printer);
+          double xscale = printer.pageRect().width() / double(pix.width());
+          double yscale = printer.pageRect().height() / double(pix.height());
+          double scale = qMin(xscale, yscale);
+          painter.translate(printer.paperRect().x() + printer.pageRect().width() / 2,
+                            printer.paperRect().y() + printer.pageRect().height() / 2);
+          painter.scale(scale, scale);
+          painter.translate(-ui->tableView_2->width() / 2, -ui->tableView_2->height() / 2);
+          painter.drawPixmap(0, 0, pix);
 
-        for (int row = 0; row < rowCount; row++) {
-            for (int column = 0; column < columnCount; column++) {
-                if (!ui->tableView_2->isColumnHidden(column)) {
-                    QString data =ui->tableView_2->model()->data(ui->tableView_2->model()->index(row, column)).toString().simplified();
-                    out << QString("<td bkcolor=0>%1</td>").arg((!data.isEmpty()) ? data : QString("&nbsp;"));
-                }
-            }
-        }
-       QTextDocument *document = new QTextDocument();
-       document->setHtml(strStream);
+        QTextDocument doc;
 
-       QString fileName = QFileDialog::getSaveFileName((QWidget* )0, "Export PDF", QString(), ".pdf");
-       if (QFileInfo(fileName).suffix().isEmpty()) { fileName.append(".txt.pdf"); }
+        doc.setHtml("htmlcontent");
+        doc.drawContents(&painter);
 
-       QPrinter printer(QPrinter::PrinterResolution);
-       printer.setOutputFormat(QPrinter::PdfFormat);
-       printer.setPaperSize(QPrinter::A4);
-       printer.setOutputFileName(fileName);
-
-       QTextDocument doc;
-
-       doc.setHtml(document->toPlainText());
-        doc.print(&printer);
+          painter.end();
 }
 
 void MainWindow::on_pushButton_50_clicked()
@@ -1262,39 +1251,32 @@ void MainWindow::on_pushButton_55_clicked()
 
 void MainWindow::on_pushButton_54_clicked()
 {
-    QString strStream;
-        QTextStream out(&strStream);
+    QPixmap pix(ui->tableView_3->size());
+          QPainter painter(&pix);
+         ui->tableView_3->render(&painter);
+          painter.end();
+          QPrinter printer(QPrinter::HighResolution);
+          printer.setOrientation(QPrinter::Landscape);
+          printer.setOutputFormat(QPrinter::PdfFormat);
+          printer.setPaperSize(QPrinter::A4);
+          printer.setOutputFileName("C:/Users/User/Desktop/1.1/2/projet C++/projet/evenement.pdf"); // will be in build folder
 
-        const int rowCount = ui->tableView_3->model()->rowCount();
-        const int columnCount = ui->tableView_3->model()->columnCount();
-        for (int column = 0; column < columnCount; column++)
-            if (!ui->tableView_3->isColumnHidden(column))
-               out << QString("<th>%1</th>").arg(ui->tableView_3->model()->headerData(column, Qt::Horizontal).toString());
+          painter.begin(&printer);
+          double xscale = printer.pageRect().width() / double(pix.width());
+          double yscale = printer.pageRect().height() / double(pix.height());
+          double scale = qMin(xscale, yscale);
+          painter.translate(printer.paperRect().x() + printer.pageRect().width() / 2,
+                            printer.paperRect().y() + printer.pageRect().height() / 2);
+          painter.scale(scale, scale);
+          painter.translate(-ui->tableView_3->width() / 2, -ui->tableView_3->height() / 2);
+          painter.drawPixmap(0, 0, pix);
 
-        for (int row = 0; row < rowCount; row++) {
-           // out << "<tr>";
-            for (int column = 0; column < columnCount; column++) {
-                if (!ui->tableView_3->isColumnHidden(column)) {
-                    QString data =ui->tableView_3->model()->data(ui->tableView_3->model()->index(row, column)).toString().simplified();
-                    out << QString("<td bkcolor=0>%1</td>").arg((!data.isEmpty()) ? data : QString("&nbsp;"));
-                }
-            }
-        }
-       QTextDocument *document = new QTextDocument();
-       document->setHtml(strStream);
+        QTextDocument doc;
 
-       QString fileName = QFileDialog::getSaveFileName((QWidget* )0, "Export PDF", QString(), ".pdf");
-       if (QFileInfo(fileName).suffix().isEmpty()) { fileName.append(".txt.pdf"); }
+        doc.setHtml("htmlcontent");
+        doc.drawContents(&painter);
 
-       QPrinter printer(QPrinter::PrinterResolution);
-       printer.setOutputFormat(QPrinter::PdfFormat);
-       printer.setPaperSize(QPrinter::A4);
-       printer.setOutputFileName(fileName);
-
-       QTextDocument doc;
-
-       doc.setHtml(document->toPlainText());
-        doc.print(&printer);
+          painter.end();
 }
 
 void MainWindow::on_pushButton_53_clicked()
@@ -1362,8 +1344,8 @@ void MainWindow::on_pushButton_58_clicked()
     QString type = ui->TypeEVE_3->text();
     QString date =ui->calendarWidget_8->selectedDate().toString();
     int nbrE = ui->NBpEVE_3->text().toInt();
-    evenement E(id,type,date,nbrE);
-    bool test = E.modifE(id,type,date,nbrE);
+    evenement E(type,date,nbrE);
+       bool test = E.modifE(id,type,date,nbrE);
     if (test)
     {
                 QMessageBox::information(nullptr, QObject::tr("database is open"),
@@ -1416,13 +1398,6 @@ void MainWindow::on_pb_ajouter_clicked()
 
 
 
-        if (id==0 )
-        {
-            qDebug () <<"problem d ajout dans le base ";
-                  QMessageBox::critical(this,"Enregister","verifier l identifiant");
-                  x++;
-
-        }
 
             if (typeanim=="" )
             {
@@ -1485,7 +1460,7 @@ QMessageBox::information(nullptr, QObject::tr("Ajouter une animation"),
 
 
 
-textajouter="L'ajout dans la base de donnees animation de id a ete effectuee avec succees";
+textajouter="L'ajout dans la base de donnees animation de LIEU:"+lieu+"  a ete effectuee avec succees";
 h.write(textajouter);
 
 }
@@ -1514,7 +1489,7 @@ void MainWindow::on_pb_supprimer_5_clicked()
     int idanim = ui->x2_2->currentText().toInt();
     qDebug()<< idanim ;
     qDebug()<< idanim ;
-    verif= QMessageBox::question( this, "Confimation De la Suppression", "Question", QMessageBox::No | QMessageBox::Yes  );
+    verif= QMessageBox::question( this, "Confimation De la Suppression", "Vouler vous Supprimer l'dentifiant"+QString::number(idanim)+"", QMessageBox::No | QMessageBox::Yes  );
 
 
     qDebug()<< verif ;
@@ -1554,7 +1529,7 @@ else
     QModelIndex  modele =ui->tabanim->currentIndex().sibling(ui->tabanim->currentIndex().row(),0);
     QString value=modele.data().toString();
       qDebug () << value;
-    textajouter="L'suppresion dans la base de donnees animation a ete effectuee avec succees";
+    textajouter="L'suppresion dans la base de donnees animation l'dentifiant"+QString::number(idanim)+" a ete effectuee avec succees";
     h.write(textajouter);
 }
 
@@ -1631,7 +1606,7 @@ void MainWindow::on_expot_clicked()
           printer.setOrientation(QPrinter::Landscape);
           printer.setOutputFormat(QPrinter::PdfFormat);
           printer.setPaperSize(QPrinter::A4);
-          printer.setOutputFileName("D:/Version final Integration Xteam/projet/Animation.pdf"); // will be in build folder
+          printer.setOutputFileName("C:/Users/User/Desktop/1.1/2/projet C++/projet/Animation.pdf"); // will be in build folder
 
           painter.begin(&printer);
           double xscale = printer.pageRect().width() / double(pix.width());
@@ -1689,7 +1664,7 @@ QMessageBox::information(nullptr, QObject::tr("Modifier une animation"),
   //QModelIndex  modele =ui->tabanime->currentIndex().sibling(ui->tabanime->currentIndex().row(),0);
     //QString value=modele.data().toString();
       //qDebug () << value;
-  textajouter="La modification dans la base de donnees animation a ete effectuee avec succees";
+  textajouter="La modification dans la base de donnees animation de LIEU:"+typeanim+" a ete effectuee avec succees";
   h.write(textajouter);
 }
 
@@ -1748,13 +1723,6 @@ void MainWindow::on_pb_ajout_clicked()
 
 
 
-        if (id==0 )
-        {
-            qDebug () <<"problem d ajout dans le base ";
-                  QMessageBox::critical(this,"Enregister","verifier l identifiant");
-                  x++;
-
-        }
 
             if (type=="" )
             {
@@ -1810,7 +1778,7 @@ void MainWindow::on_pb_ajout_clicked()
 
         }
 
-    textajouter="L'ajout dans la base de donnees equipement a ete effectuee avec succees";
+    textajouter="L'ajout dans la base de donnees equipement :"+type+"  a ete effectuee avec succees";
     h.write(textajouter);
 
 
@@ -1836,7 +1804,7 @@ void MainWindow::on_pb_supprimer_3_clicked()
     int id = ui->x2->currentText().toInt();
     qDebug()<< id ;
     qDebug()<< id ;
-    verif= QMessageBox::question( this, "Confimation De la Suppression", "Question", QMessageBox::No | QMessageBox::Yes  );
+    verif= QMessageBox::question( this, "Confimation De la Suppression", "Vouler vous Supprimer l'dentifiant"+QString::number(id)+"", QMessageBox::No | QMessageBox::Yes  );
     qDebug()<< verif ;
 
 
@@ -1874,7 +1842,7 @@ void MainWindow::on_pb_supprimer_3_clicked()
        QModelIndex  modele =ui->tabanim->currentIndex().sibling(ui->tabanim->currentIndex().row(),0);
        QString value=modele.data().toString();
          qDebug () << value;
-       textajouter="L'suppresion dans la base de donnees equipement a ete effectuee avec succees";
+       textajouter="L'suppresion dans la base de donnees equipement ID:"+QString::number(id)+" a ete effectuee avec succees";
        h.write(textajouter);
 }
 
@@ -1897,7 +1865,7 @@ void MainWindow::on_exporter_clicked()
 {
     QPrinter printer;
     printer.setOutputFormat(QPrinter::PdfFormat);
-    printer.setOutputFileName("D:/Version final Integration Xteam/projet/Exporter.pdf");
+    printer.setOutputFileName("C:/Users/User/Desktop/1.1/2/projet C++/projet/Exporter.pdf");
     QPainter painter;
     painter.begin(&printer);
 
@@ -1989,7 +1957,7 @@ QMessageBox::information(nullptr, QObject::tr("Modifier un equipement"),
                   QObject::tr("Erreur !.\n"
                               "Click Cancel to exit."), QMessageBox::Cancel);
 
-  textajouter="La modification dans la base de donnees equipement a ete effectuee avec succees";
+  textajouter="La modification dans la base de donnees equipement :"+type+" a ete effectuee avec succees";
    h.write(textajouter);
 
 }
@@ -2198,3 +2166,175 @@ while (query1.next()) {
 
 
 }
+
+void MainWindow::on_pushButton_6_clicked()
+{
+
+
+                QSqlQueryModel * modal= new QSqlQueryModel();
+                        QSqlQuery request;
+                        request.prepare("select IDEVE from EVENEMENT");
+                        request.exec();
+                        modal->setQuery(request);
+                        ui->Ref_Eve->setModel(modal);
+
+}
+
+void MainWindow::makePolt2()
+{
+    QLinearGradient gradient(0, 0, 0, 400);
+    gradient.setColorAt(0, QColor(90, 90, 90));
+    gradient.setColorAt(0.38, QColor(105, 105, 105));
+    gradient.setColorAt(1, QColor(70, 70, 70));
+    ui->customPlot_3->setBackground(QBrush(gradient));
+    QCPBars *regen = new QCPBars(ui->customPlot_3->xAxis, ui->customPlot_3->yAxis);
+    regen->setAntialiased(false);
+    regen->setStackingGap(1);
+    regen->setName("Stat pandoud");
+    regen->setPen(QPen(QColor(0, 168, 140).lighter(130)));
+    regen->setBrush(QColor(0, 168, 140));
+
+
+    // prepare x axis with country labels:
+    QVector<double> ticks;
+    QVector<QString> labels;
+    ticks << 1 << 2 ;
+
+    labels << ">100 per" << "<100 per" ;
+    QSharedPointer<QCPAxisTickerText> textTicker(new QCPAxisTickerText);
+    textTicker->addTicks(ticks, labels);
+    ui->customPlot_3->xAxis->setTicker(textTicker);
+    ui->customPlot_3->xAxis->setTickLabelRotation(60);
+    ui->customPlot_3->xAxis->setSubTicks(false);
+    ui->customPlot_3->xAxis->setTickLength(0, 4);
+    ui->customPlot_3->xAxis->setRange(0, 8);
+    ui->customPlot_3->xAxis->setBasePen(QPen(Qt::white));
+    ui->customPlot_3->xAxis->setTickPen(QPen(Qt::white));
+    ui->customPlot_3->xAxis->grid()->setVisible(true);
+    ui->customPlot_3->xAxis->grid()->setPen(QPen(QColor(130, 130, 130), 0, Qt::DotLine));
+    ui->customPlot_3->xAxis->setTickLabelColor(Qt::white);
+    ui->customPlot_3->xAxis->setLabelColor(Qt::white);
+
+    // prepare y axis:
+    ui->customPlot_3->yAxis->setRange(0,20);
+    ui->customPlot_3->yAxis->setPadding(5); // a bit more space to the left border
+    ui->customPlot_3->yAxis->setBasePen(QPen(Qt::white));
+    ui->customPlot_3->yAxis->setTickPen(QPen(Qt::white));
+    ui->customPlot_3->yAxis->setSubTickPen(QPen(Qt::white));
+    ui->customPlot_3->yAxis->grid()->setSubGridVisible(true);
+    ui->customPlot_3->yAxis->setTickLabelColor(Qt::white);
+    ui->customPlot_3->yAxis->setLabelColor(Qt::white);
+    ui->customPlot_3->yAxis->grid()->setPen(QPen(QColor(130, 130, 130), 0, Qt::SolidLine));
+    ui->customPlot_3->yAxis->grid()->setSubGridPen(QPen(QColor(130, 130, 130), 0, Qt::DotLine));
+
+    // Add data:
+    QVector<double> regenData;
+int nbr;
+int he;
+QSqlQuery query1("select count(*) from EVENEMENT where NBEVE > 100 ");
+while (query1.next()) {
+
+                        he = query1.value(0).toInt();
+
+                                                    }
+
+    QSqlQuery query2("select count(*) from EVENEMENT where NBEVE < 100 ");
+    while (query2.next()) {
+                           nbr = query2.value(0).toInt();
+
+                             }
+    regenData << he << nbr ;
+    regen->setData(ticks, regenData);
+
+    // setup legend:
+    ui->customPlot_3->legend->setVisible(true);
+    ui->customPlot_3->axisRect()->insetLayout()->setInsetAlignment(0, Qt::AlignTop|Qt::AlignHCenter);
+    ui->customPlot_3->legend->setBrush(QColor(255, 255, 255, 100));
+    ui->customPlot_3->legend->setBorderPen(Qt::NoPen);
+    QFont legendFont = font();
+    legendFont.setPointSize(10);
+    ui->customPlot_3->legend->setFont(legendFont);
+    ui->customPlot_3->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom);
+
+}
+
+
+void MainWindow::on_actualiser_amine_clicked()
+{
+    QSqlQueryModel * modal= new QSqlQueryModel();
+            QSqlQuery request;
+            request.prepare("select CIN from PERSONNEL");
+            request.exec();
+            modal->setQuery(request);
+            ui->comboBox_3->setModel(modal);
+}
+
+void MainWindow::on_excel1_clicked()
+{
+    QTableView *table;
+               table = ui->tabequip;
+               QString filters("CSV files (*.csv);;All files (*.*)");
+               QString defaultFilter("CSV files (*.csv)");
+               QString fileName = QFileDialog::getSaveFileName(0, "Save file", QCoreApplication::applicationDirPath(),
+                                  filters, &defaultFilter);
+               QFile file(fileName);
+               QAbstractItemModel *model =  table->model();
+               if (file.open(QFile::WriteOnly | QFile::Truncate)) {
+                   QTextStream data(&file);
+                   QStringList strList;
+                   for (int i = 0; i < model->columnCount(); i++) {
+                       if (model->headerData(i, Qt::Horizontal, Qt::DisplayRole).toString().length() > 0)
+                           strList.append("\"" + model->headerData(i, Qt::Horizontal, Qt::DisplayRole).toString() + "\"");
+                       else
+                           strList.append("");
+                   }
+                   data << strList.join(";") << "\n";
+                   for (int i = 0; i < model->rowCount(); i++) {
+                       strList.clear();
+                       for (int j = 0; j < model->columnCount(); j++) {
+                           if (model->data(model->index(i, j)).toString().length() > 0)
+                               strList.append("\"" + model->data(model->index(i, j)).toString() + "\"");
+                           else
+                               strList.append("");
+                       }
+                       data << strList.join(";") + "\n";
+                   }
+                   file.close();
+                   QMessageBox::information(this,"Exporter To Excel","Exporter En Excel Avec Succées ");
+               }
+}
+
+void MainWindow::on_excel2_clicked()
+{
+    QTableView *table;
+               table = ui->tabanim;
+               QString filters("CSV files (*.csv);;All files (*.*)");
+               QString defaultFilter("CSV files (*.csv)");
+               QString fileName = QFileDialog::getSaveFileName(0, "Save file", QCoreApplication::applicationDirPath(),
+                                  filters, &defaultFilter);
+               QFile file(fileName);
+               QAbstractItemModel *model =  table->model();
+               if (file.open(QFile::WriteOnly | QFile::Truncate)) {
+                   QTextStream data(&file);
+                   QStringList strList;
+                   for (int i = 0; i < model->columnCount(); i++) {
+                       if (model->headerData(i, Qt::Horizontal, Qt::DisplayRole).toString().length() > 0)
+                           strList.append("\"" + model->headerData(i, Qt::Horizontal, Qt::DisplayRole).toString() + "\"");
+                       else
+                           strList.append("");
+                   }
+                   data << strList.join(";") << "\n";
+                   for (int i = 0; i < model->rowCount(); i++) {
+                       strList.clear();
+                       for (int j = 0; j < model->columnCount(); j++) {
+                           if (model->data(model->index(i, j)).toString().length() > 0)
+                               strList.append("\"" + model->data(model->index(i, j)).toString() + "\"");
+                           else
+                               strList.append("");
+                       }
+                       data << strList.join(";") + "\n";
+                   }
+                   file.close();
+                   QMessageBox::information(this,"Exporter To Excel","Exporter En Excel Avec Succées ");
+               }
+               }

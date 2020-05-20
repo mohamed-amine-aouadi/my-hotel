@@ -36,7 +36,7 @@ void pdf::pdffonction()
 {
         QPrinter printer;
         printer.setOutputFormat(QPrinter::PdfFormat);
-        printer.setOutputFileName("C:/Users/ASUS/Desktop/youssefselmi/MonPDF.pdf");
+        printer.setOutputFileName("C:/Users/User/Desktop/1.1/2/projet C++/projet/MonPDF.pdf");
         QPainter painter;
         painter.begin(&printer);
 

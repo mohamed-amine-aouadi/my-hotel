@@ -20,5 +20,12 @@
         <file>icones/focus.png</file>
         <file>icones/printer.png</file>
         <file>icones/pdf.png</file>
+        <file>icones/export.png</file>
+        <file>icones/rotation.png</file>
+        <file>icones/hotel.png</file>
+        <file>ajout.png</file>
+        <file>myappico.ico</file>
+        <file>icones/excel.png</file>
+        <file>icones/video.png</file>
     </qresource>
 </RCC>

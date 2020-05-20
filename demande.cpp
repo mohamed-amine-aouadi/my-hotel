@@ -10,12 +10,12 @@ demande::demande()
     ETAT=0;
 }
 
-demande::demande(int QUANTITE_DEMANDE,int REF_DEMANDE,QString TYPE_DEMANDE,int CIN,int ETAT,QString DATEDEBUT)
+demande::demande(int QUANTITE_DEMANDE,QString TYPE_DEMANDE,int CIN,int ETAT,QString DATEDEBUT)
 {
    this->CIN=CIN;
     this->ETAT=ETAT;
     this->DATEDEBUT=DATEDEBUT;
-    this->REF_DEMANDE=REF_DEMANDE;
+    //this->REF_DEMANDE=REF_DEMANDE;
     this->TYPE_DEMANDE=TYPE_DEMANDE;
     this->QUANTITE_DEMANDE=QUANTITE_DEMANDE;
 }
@@ -30,9 +30,8 @@ bool demande::ajouter_demande()
 {
     QSqlQuery query;
     QString res=QString::number(CIN);
-    query.prepare("INSERT INTO DEMANDE (REF_DEMANDE, QUANTITE_DEMANDE, TYPE_DEMANDE, CIN, ETAT, DATEDEBUT) VALUES (:REF_DEMANDE, :QUANTITE_DEMANDE, :TYPE_DEMANDE, :CIN, :ETAT, :DATEDEBUT)");
+    query.prepare("INSERT INTO DEMANDE (QUANTITE_DEMANDE, TYPE_DEMANDE, CIN, ETAT, DATEDEBUT) VALUES (:QUANTITE_DEMANDE, :TYPE_DEMANDE, :CIN, :ETAT, :DATEDEBUT)");
     query.bindValue(":QUANTITE_DEMANDE",QUANTITE_DEMANDE);
-    query.bindValue(":REF_DEMANDE",REF_DEMANDE);
     query.bindValue(":TYPE_DEMANDE",TYPE_DEMANDE);
     query.bindValue(":CIN",res);
     query.bindValue(":ETAT",ETAT);
@@ -52,11 +51,52 @@ QSqlQueryModel * demande::afficher_demande()
     return model;
 
 }
-bool demande::supprimer_demande(int cin)
+bool demande::supprimer_demande(int REF)
 {
     QSqlQuery query;
-    QString res= QString::number(cin);
-    query.prepare("delete from demande where CIN = :cin");
-    query.bindValue(":cin",res);
+    QString res= QString::number(REF);
+    query.prepare("delete from demande where REF_DEMANDE = :REF");
+    query.bindValue(":REF",res);
     return query.exec();
 }
+QSqlQuery demande::selectionner(QString val)
+{
+    QSqlQuery qry;
+    qry.prepare("select * from demande where REF_DEMANDE=:val ");
+    qry.bindValue(":val",val);
+    return qry;
+}
+bool demande::modifier(int cin,int ref,int quantite,QString type,int etat,QString date)
+{
+    QSqlQuery qry;
+    qry.prepare("update demande set QUANTITE_DEMANDE=:Quantite,TYPE_DEMANDE=:Type,ETAT=:Etat,DATEDEBUT=:Date where REF_DEMANDE=:ref ");
+    qry.bindValue(":cin",cin);
+     qry.bindValue(":ref",ref);
+    qry.bindValue(":Quantite",quantite);
+    qry.bindValue(":Type",type);
+    qry.bindValue(":Etat",etat);
+    qry.bindValue(":Date",date);
+     return qry.exec();
+}
+QSqlQuery demande::recherche(QString type, QString val)
+{
+    QSqlQuery request;
+   val="%"+val+"%";
+   if (type=="TYPE"){
+       request.prepare("SELECT * FROM demande WHERE TYPE_DEMANDE LIKE:val ");
+   }else if (type=="ETAT"){
+       request.prepare("SELECT * FROM demande WHERE ETAT LIKE:val");
+   }else if (type=="CIN"){
+       request.prepare("SELECT * FROM demande WHERE CIN LIKE:val");
+   }else if (type=="DATE"){
+       request.prepare("SELECT * FROM demande WHERE DATEDEBUT LIKE:val");
+   }
+   request.bindValue(":val",val);
+   return request;
+}
+bool demande::updateDemande(int ref){
+       QSqlQuery update;
+       update.prepare("update DEMANDE set ETAT=1 where REF_DEMANDE=:ref");
+     update.bindValue(":ref",ref);
+    return update.exec();
+    }
